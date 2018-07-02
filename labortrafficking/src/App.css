@@ -9,8 +9,8 @@
 
 .App-header {
   background-color: #222;
-  height: 150px;
-  padding: 20px;
+  height: 200px;
+  padding: 10px;
   color: white;
 }
 
@@ -19,10 +19,22 @@
 }
 
 .App-intro {
+  padding: 10px;
   font-size: large;
+}
+
+.asse {
+  padding: 10px;
+  font-size: xx-large;
+}
+
+.Assess {
+  padding: 10px;
+  padding-bottom: 20px;
 }
 
 @keyframes App-logo-spin {
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+

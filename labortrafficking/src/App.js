@@ -7,6 +7,7 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import update from 'react-addons-update';
 
+
 class App extends Component {
 
   constructor(props) {
@@ -18,6 +19,7 @@ class App extends Component {
      question: '',
      answerOptions: [],
      answer: '',
+     page: 1,
      answersCount: {
        No: 0,
        Yes: 0,
@@ -26,6 +28,8 @@ class App extends Component {
      result: ''
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this._onAssessClick = this._onAssessClick.bind(this);
+    this._onStartClick = this._onStartClick.bind(this);
   }
 
   componentWillMount() {
@@ -107,6 +111,55 @@ class App extends Component {
     );
   }
 
+  renderHome() {
+    return (
+      <p className="App-intro">
+          Description goes here....................................
+          <br></br>
+          <br></br>
+          Home page....................................
+          <br></br>
+          <br></br>
+          Some informative graphics here............
+      </p>
+    );
+  }
+
+  _onAssessClick() {
+    this.setState({
+      page: 2,
+    });
+  }
+
+  _onStartClick() {
+    this.setState({
+      page: 3,
+    });
+  }
+
+  renderAssessment() {
+    return (
+    <div className="Assess">
+      <p className="asse">
+          <strong>Assessment</strong>
+      </p>
+      <button type="button" class="button">Prepare</button>
+      <br></br>
+      <br></br>
+      <br></br>
+      <button type="button" onClick={this._onStartClick} class="button">Start</button>
+    </div>
+    );
+  }
+
+  myFunction() {
+    var x = document.getElementById("myTopnav");
+    if (x.className === "topnav") {
+        x.className += " responsive";
+    } else {
+        x.className = "topnav";
+    }
+  }
 
   render() {
     return (
@@ -115,10 +168,18 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Labor Trafficking Identification Tool</h1>
         </header>
-        <p className="App-intro">
-          Description goes here....................................
-        </p>
-        {this.state.result ? this.renderResult() : this.renderQuiz()}
+
+        <div class="topnav">
+        <a class="button" onClick= {this._onAssessClick}><strong>Assess</strong></a>
+        &nbsp;
+        <a class="button"><strong>Investigate</strong></a>
+        &nbsp;
+        <a class="button"><strong>Victim Services</strong></a>
+        <a href="javascript:void(0);" class="icon" onclick="myFunction()">
+        <i class="fa fa-bars"></i></a>
+        </div>
+        {this.state.page == 1 ? this.renderHome() : this.state.page == 2 ? this.renderAssessment() : 
+          this.state.page == 3 ? (this.state.result ? this.renderResult() : this.renderQuiz()) : this.renderHome()}
       </div>
     );
   }

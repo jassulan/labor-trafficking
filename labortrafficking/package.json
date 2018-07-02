@@ -4,11 +4,12 @@
   "private": true,
   "dependencies": {
     "prop-types": "^15.6.2",
-    "react": "16.0.0-alpha.12",
-    "react-native": "0.46.4",
+    "react": "^16.0.0-alpha.12",
     "react-addons-css-transition-group": "^15.6.2",
     "react-addons-update": "^15.6.2",
     "react-dom": "^16.4.1",
+    "react-native": "0.46.4",
+    "react-router": "^4.3.1",
     "react-scripts": "1.1.4"
   },
   "scripts": {
