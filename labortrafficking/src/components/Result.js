@@ -4,19 +4,10 @@ import ReactCSSTransitionGroup from 'react-addons-css-transition-group';
 function Result(props) {
 
   return (
-    <ReactCSSTransitionGroup
-      className="container result"
-      component="div"
-      transitionName="fade"
-      transitionEnterTimeout={800}
-      transitionLeaveTimeout={500}
-      transitionAppear
-      transitionAppearTimeout={500}
-    >
       <div>
+      <br></br><br></br><br></br>
         Labor Trafficking Case : <strong>{props.quizResult}</strong>!
       </div>
-    </ReactCSSTransitionGroup>
   );
 
 }

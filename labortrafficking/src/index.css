@@ -256,6 +256,7 @@ body {
     color: #fff;
     background: #2f3036;
     text-decoration: none;
+    cursor: pointer;
 }
 /*Hover state for top level links*/
 .lis:hover a {
@@ -271,6 +272,7 @@ body {
     text-align: center;
     padding: 10px 0;
     display: none;
+    cursor: pointer;
 }
 /*Hide checkbox*/
 input[type=checkbox]{
@@ -300,4 +302,24 @@ input[type=checkbox]:checked ~ #menu{
     .show-menu {
         display:block;
     }
+}
+
+.btn-group .button1 {
+    background-color: #19c589;
+    border: 1px solid green;
+    width : 100%;
+    color: white;
+    padding: 15px 32px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    cursor: pointer;
+    float: left;
+}
+.btn-group .button1:not(:last-child) {
+    border-right: none; /* Prevent double borders */
+}
+.btn-group .button1:hover {
+    background-color: #708090;
 }

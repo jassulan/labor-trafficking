@@ -1,86 +1,86 @@
 var quizQuestions = [
   {
-      question: "First question in Category 1",
+      question: "First question in Category",
       answers: [
           {
               type: "Yes",
-              content: "Answer1"
+              content: "Yes"
           },
           {
               type: "No",
-              content: "Answer2"
+              content: "No"
           },
           {
               type: "Maybe",
-              content: "Answer3"
+              content: "Maybe"
           }
       ]
   },
   {
-      question: "Second question in Category 1",
+      question: "Second question in Category",
       answers: [
           {
               type: "Yes",
-              content: "Answer1"
+              content: "Yes"
           },
           {
               type: "No",
-              content: "Answer2"
+              content: "No"
           },
           {
               type: "Maybe",
-              content: "Answer3"
+              content: "Maybe"
           }
       ]
   },
   {
-      question: "Third question in Category 1",
+      question: "Third question in Category",
       answers: [
           {
               type: "Yes",
-              content: "Answer1"
+              content: "Yes"
           },
           {
               type: "No",
-              content: "Answer2"
+              content: "No"
           },
           {
               type: "Maybe",
-              content: "Answer3"
+              content: "Maybe"
           }
       ]
   },
   {
-      question: "Fourth question in Category 1",
+      question: "Fourth question in Category",
       answers: [
           {
               type: "Yes",
-              content: "Answer1"
+              content: "Yes"
           },
           {
               type: "No",
-              content: "Answer2"
+              content: "No"
           },
           {
               type: "Maybe",
-              content: "Answer3"
+              content: "Maybe"
           }
       ]
   },
   {
-      question: "Fifth question in Category 1",
+      question: "Fifth question in Category",
       answers: [
           {
               type: "Yes",
-              content: "Answer1"
+              content: "Yes"
           },
           {
               type: "No",
-              content: "Answer2"
+              content: "No"
           },
           {
               type: "Maybe",
-              content: "Answer3"
+              content: "Maybe"
           }
       ]
   }

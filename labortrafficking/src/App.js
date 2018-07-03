@@ -6,6 +6,7 @@ import quizQuestions from './api/quizQuestions';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 import update from 'react-addons-update';
+import Popup from "reactjs-popup";
 
 class App extends Component {
 
@@ -32,6 +33,8 @@ class App extends Component {
     this._onPrepareClick = this._onPrepareClick.bind(this);
     this.QuizFunc = this.QuizFunc.bind(this);
     this._onCompleteClick = this._onCompleteClick.bind(this);
+    this._onInvestigateClick = this._onInvestigateClick.bind(this);
+    this._onVictimClick = this._onVictimClick.bind(this);
   }
 
   componentWillMount() {
@@ -96,6 +99,7 @@ class App extends Component {
 
   renderQuiz() {
     return (
+      <div>
       <Quiz
         answer={this.state.answer}
         answerOptions={this.state.answerOptions}
@@ -104,12 +108,57 @@ class App extends Component {
         questionTotal={quizQuestions.length}
         onAnswerSelected={this.handleAnswerSelected}
       />
+      <br></br><br></br>
+      <button class="button" >Interview Tips --></button>
+      <br></br><br></br>
+      <button class="button" >Fact Patterns --></button>
+      <br></br><br></br>
+      <button class="button" >Mass Statute --></button>
+      <br></br><br></br>
+      </div>
     );
   }
-
+  
   renderResult() {
     return (
-      <Result quizResult={this.state.result} />
+        <div>
+        <br></br><br></br><br></br>
+        <Popup
+          trigger={<button className="button"> See Assessment Results </button>}
+          modal
+          contentStyle={{ maxWidth: "600px", width: "90%" }}>
+          {close => (
+          <div className="modal">
+            <div className="header"> <strong>Assessment Results </strong></div>
+            <div className="content1">
+              {" "}
+              Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a
+              nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet
+              quibusdam voluptates delectus doloremque, explicabo tempore dicta
+              adipisci fugit amet dignissimos?
+              <br />
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
+              sit commodi beatae optio voluptatum sed eius cumque, delectus saepe
+              repudiandae explicabo nemo nam libero ad, doloribus, voluptas rem
+              alias. Vitae?
+              <br></br><br></br>
+              <Result quizResult={this.state.result} />
+              <br></br><br></br>
+            </div>
+            <div className="actions">
+              <div className="btn-group">
+                <button className="button1">Download PDF</button>
+                <button className="button1" onClick={this._onStartClick}>Next Category</button>
+                <button className="button1" onClick={() => { console.log("modal closed ");
+                close(); this._onCompleteClick();}}>
+                Exit
+                </button>
+              </div>
+            </div>
+          </div>
+          )}
+        </Popup>
+        </div>
     );
   }
 
@@ -173,11 +222,25 @@ class App extends Component {
     });
   }
 
+  _onInvestigateClick() {
+    this.setState({
+      page: 7,
+    });
+  }
+
+  _onVictimClick() {
+    this.setState({
+      page: 8,
+    });
+  }
+
   renderPrepare() {
     return (
       <div class = "prep">
-      <p>Prepare for Assessment</p>
-      <p>Preliminary Interview Information</p>
+      <p className="asse">
+          <strong>Prepare for Assessment</strong>
+      </p>
+      <p><strong>Preliminary Interview Information</strong></p>
       <button class="collapsible" onClick = {this.prepareFunc}>Open Section 1</button>
       <div class="content">
         <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat.</p>
@@ -199,7 +262,7 @@ class App extends Component {
   renderAssessmentSteps() {
     return (
       <div class = "prep">
-      <p>Assessment Steps</p>
+      <p className="asse"><strong>Assessment Steps</strong></p>
       <button class="btn category" onClick = {this.QuizFunc}>Serious Harm</button>
       <br></br><br></br>
       <button class="btn category" onClick = {this.QuizFunc}>Physical Restraint</button>
@@ -213,6 +276,34 @@ class App extends Component {
       <button class="btn category" onClick = {this.QuizFunc}>Identity Documents</button>
       <br></br><br></br><br></br>
       <button class="button"  onClick = {this._onCompleteClick}>Complete</button>
+      </div>
+    );
+  }
+
+  renderInvestigate() {
+    return (
+      <div>
+        <p className="asse">Checklist</p>
+        <ol>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+        </ol>
+      </div>
+    );
+  }
+
+  renderVictim() {
+    return (
+      <div>
+        <p className="asse">Hotlines</p>
+        <ol>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+          <li> Some Text........ </li>
+        </ol>
       </div>
     );
   }
@@ -239,21 +330,22 @@ class App extends Component {
           <img src={logo} className="App-logo" alt="logo" />
           <h1 className="App-title">Labor Trafficking Identification Tool</h1>
         </header>
-
-        <label for="show-menu" class="show-menu">Show Menu</label>
+        <div>
+        <label for="show-menu" class="show-menu">Show/Hide Menu</label>
         <input type="checkbox" id="show-menu" role="button" />
         <ul id="menu" class="menu">
-        <li class="lis"><a href="#Home" onClick= {this._onCompleteClick}>Home</a></li>
-        <li class="lis"><a href="#Assess" onClick= {this._onAssessClick}><strong>Assess</strong></a></li>
-        <li class="lis"><a href="#Investigate"><strong>Investigate</strong></a></li>
-        <li class="lis"><a href="#VictimServices"><strong>Victim Services</strong></a></li>
+        <li class="lis"><a onClick= {this._onCompleteClick}><strong>Home</strong></a></li>
+        <li class="lis"><a onClick= {this._onAssessClick}><strong>Assess</strong></a></li>
+        <li class="lis"><a onClick= {this._onInvestigateClick}><strong>Investigate</strong></a></li>
+        <li class="lis"><a onClick= {this._onVictimClick}><strong>Victim Services</strong></a></li>
         </ul>
-
+        </div>
         
 
         {this.state.page == 1 ? this.renderHome() : this.state.page == 2 ? this.renderAssessment() : 
           this.state.page == 3 ? this.renderPrepare() : this.state.page == 4 ? this.renderAssessmentSteps() :
-          this.state.page == 5 ? (this.state.result ? this.renderResult() : this.renderQuiz()) : this.renderHome()}
+          this.state.page == 5 ? (this.state.result ? this.renderResult() : this.renderQuiz()) : this.state.page == 7 ?
+          this.renderInvestigate() : this.state.page == 8 ? this.renderVictim() : this.renderHome()}
       </div>
     );
   }

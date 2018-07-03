@@ -20,15 +20,6 @@ function Quiz(props) {
   }
 
   return (
-    <ReactCSSTransitionGroup
-      className="container"
-      component="div"
-      transitionName="fade"
-      transitionEnterTimeout={800}
-      transitionLeaveTimeout={500}
-      transitionAppear
-      transitionAppearTimeout={500}
-    >
       <div key={props.questionId}>
         <QuestionCount
           counter={props.questionId}
@@ -39,7 +30,6 @@ function Quiz(props) {
           {props.answerOptions.map(renderAnswerOptions)}
         </ul>
       </div>
-    </ReactCSSTransitionGroup>
   );
 }
 
