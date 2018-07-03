@@ -3,7 +3,7 @@ import React from 'react';
 function AnswerOption(props) {
 
   return (
-    <li className="answerOption">
+    <li class= "answers" className="answerOption">
       <input
         type="radio"
         className="radioCustomButton"
