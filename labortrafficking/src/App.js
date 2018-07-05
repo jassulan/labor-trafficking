@@ -7,20 +7,24 @@ import Quiz from './components/Quiz';
 import Result from './components/Result';
 import update from 'react-addons-update';
 import Popup from "reactjs-popup";
+import jsPDF from 'jspdf';
 
 class App extends Component {
 
   constructor(props) {
     super(props);
-
+    
     this.state = {
      counter: 0,
      questionId: 1,
      question: '',
      answerOptions: [],
      answer: '',
+     line: 0,
      page: 1,
+     addpage: 0,
      result: '',
+     doc : new jsPDF(),
      answersCount: {
        No: 0,
        Yes: 0,
@@ -35,6 +39,7 @@ class App extends Component {
     this._onCompleteClick = this._onCompleteClick.bind(this);
     this._onInvestigateClick = this._onInvestigateClick.bind(this);
     this._onVictimClick = this._onVictimClick.bind(this);
+    this.downloadPdf = this.downloadPdf.bind(this);
   }
 
   componentWillMount() {
@@ -50,7 +55,37 @@ class App extends Component {
     return array;
   };
 
+  writePdf(answer) {
+    // if (this.state.addpage == 1) {
+    //   this.state.doc.addPage();
+    // }
+    // else {
+    //   this.state.addpage = 1;
+    // }
+    var a = this.state.line + 20;
+    if (a > 297) {
+      a = 20;
+    }
+    var b = a + 10;
+    if (b > 297) {
+      b = 20;
+    }
+    var c = b + 10;
+    if (c > 297) {
+      c = 20;
+    }
+    this.state.doc.text('Question No. ' + String(this.state.questionId), 10, a);
+    this.state.doc.text(String(this.state.question), 10, b);
+    this.state.doc.text('Chosen Answer: ' + String(answer), 10, c); 
+    this.setState({line: c});
+  }
+
+  downloadPdf() {
+    this.state.doc.save('Assessment Results.pdf');
+  }
+
   setUserAnswer(answer) {
+    this.writePdf(answer);
     const updatedAnswersCount = update(this.state.answersCount, {
       [answer]: {$apply: (currentValue) => currentValue + 1}
     });
@@ -82,8 +117,12 @@ class App extends Component {
 
   setResults (result) {
     if (result.length === 1) {
+      const a = this.state.line + 20;
+      this.state.doc.text('Labor Trafficking case: ' + String(result[0]), 10, a);
       this.setState({ result: result[0] });
     } else {
+      const a = this.state.line + 20;
+      this.state.doc.text('Labor Trafficking case: Maybe', 10, a);
       this.setState({ result: 'Maybe' });
     }
   }
@@ -147,7 +186,7 @@ class App extends Component {
             </div>
             <div className="actions">
               <div className="btn-group">
-                <button className="button1">Download PDF</button>
+                <button className="button1" onClick={this.downloadPdf}>Download PDF</button>
                 <button className="button1" onClick={this._onStartClick}>Next Category</button>
                 <button className="button1" onClick={() => { console.log("modal closed ");
                 close(); this._onCompleteClick();}}>
