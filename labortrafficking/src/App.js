@@ -42,6 +42,28 @@ class App extends Component {
     this.downloadPdf = this.downloadPdf.bind(this);
   }
 
+
+  newF() {
+    const { Client } = require('pg');
+
+    const client = new Client({
+      connectionString: 'postgres://username:password5@localhost:5432/Authenticate',
+      ssl: true,
+    });
+
+    client.connect();
+
+    client.query('SELECT * FROM login;', (err, res) => {
+      if (err) throw err;
+      for (let row of res.rows) {
+        console.log(JSON.stringify(row));
+      }
+      client.end();
+    });
+
+  }
+  
+
   componentWillMount() {
     const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
 
@@ -56,12 +78,7 @@ class App extends Component {
   };
 
   writePdf(answer) {
-    // if (this.state.addpage == 1) {
-    //   this.state.doc.addPage();
-    // }
-    // else {
-    //   this.state.addpage = 1;
-    // }
+
     var a = this.state.line + 20;
     if (a > 297) {
       a = 20;
@@ -202,6 +219,7 @@ class App extends Component {
   }
 
   renderHome() {
+    this.newF();
     return (
       <p className="App-intro">
           Description goes here....................................
@@ -363,6 +381,24 @@ class App extends Component {
   }
 
   render() {
+
+    // var { Client } = require('pg');
+
+    // var client = new Client({
+    //   connectionString: "postgres://postgres:Abhinav#5@localhost:5432/Authenticate",
+    //   ssl: true,
+    // });
+
+    // client.connect();
+
+    // client.query('SELECT * FROM login;', (err, res) => {
+    //   if (err) throw err;
+    //   for (let row of res.rows) {
+    //     console.log(JSON.stringify(row));
+    //   }
+    //   client.end();
+    // });
+    
     return (
       <div className="App">
         <header className="App-header">

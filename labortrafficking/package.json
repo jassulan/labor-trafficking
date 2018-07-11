@@ -3,7 +3,10 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "dns": "^0.2.2",
     "jspdf": "^1.4.1",
+    "mysql": "^2.15.0",
+    "pg": "^7.4.3",
     "prop-types": "^15.6.2",
     "react": "16.0.0-alpha.12",
     "react-addons-css-transition-group": "^15.6.2",
@@ -14,7 +17,8 @@
     "react-responsive-navbar": "^1.0.11",
     "react-router": "^4.3.1",
     "react-scripts": "1.1.4",
-    "reactjs-popup": "^1.1.1"
+    "reactjs-popup": "^1.1.1",
+    "sequelize": "^4.38.0"
   },
   "scripts": {
     "start": "react-scripts start",
