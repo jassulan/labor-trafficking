@@ -47,13 +47,13 @@ class App extends Component {
     const { Client } = require('pg');
 
     const client = new Client({
-      connectionString: 'postgres://username:password5@localhost:5432/Authenticate',
+      connectionString: 'postgres://zwliluxbonzcmb:d3b0e9e1b06416803c7b3a79f496c5e62ac0dc7bac92aa202a9d99922dd5032d@ec2-54-83-33-213.compute-1.amazonaws.com:5432/d6rt8s9pq8125o',
       ssl: true,
     });
 
     client.connect();
 
-    client.query('SELECT * FROM login;', (err, res) => {
+    client.query('SELECT * FROM Login;', (err, res) => {
       if (err) throw err;
       for (let row of res.rows) {
         console.log(JSON.stringify(row));
