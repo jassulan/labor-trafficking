@@ -43,25 +43,25 @@ class App extends Component {
   }
 
 
-  newF() {
-    const { Client } = require('pg');
+  // newF() {
+  //   const { Client } = require('pg');
 
-    const client = new Client({
-      connectionString: 'postgres://zwliluxbonzcmb:d3b0e9e1b06416803c7b3a79f496c5e62ac0dc7bac92aa202a9d99922dd5032d@ec2-54-83-33-213.compute-1.amazonaws.com:5432/d6rt8s9pq8125o',
-      ssl: true,
-    });
+  //   const client = new Client({
+  //     connectionString: 'postgres://zwliluxbonzcmb:d3b0e9e1b06416803c7b3a79f496c5e62ac0dc7bac92aa202a9d99922dd5032d@ec2-54-83-33-213.compute-1.amazonaws.com:5432/d6rt8s9pq8125o',
+  //     ssl: true,
+  //   });
 
-    client.connect();
+  //   client.connect();
 
-    client.query('SELECT * FROM Login;', (err, res) => {
-      if (err) throw err;
-      for (let row of res.rows) {
-        console.log(JSON.stringify(row));
-      }
-      client.end();
-    });
+  //   client.query('SELECT * FROM Login;', (err, res) => {
+  //     if (err) throw err;
+  //     for (let row of res.rows) {
+  //       console.log(JSON.stringify(row));
+  //     }
+  //     client.end();
+  //   });
 
-  }
+  // }
   
 
   componentWillMount() {
@@ -219,8 +219,15 @@ class App extends Component {
   }
 
   renderHome() {
-    this.newF();
     return (
+      <div>
+      <div class="ButBar">
+        <p class="App-title1">A tool to help investigators identify labor trafficking under Massachusetts law.<br></br></p>
+        <button type="button" class="button1" onClick={this._onPrepareClick}>Prepare</button>
+        <button type="button" onClick={this._onStartClick} class="button1">Start</button>
+        <br></br>
+        <br></br>
+      </div>
       <p className="App-intro">
           Description goes here....................................
           <br></br>
@@ -230,6 +237,7 @@ class App extends Component {
           <br></br>
           Some informative graphics here............
       </p>
+      </div>
     );
   }
 
@@ -401,13 +409,12 @@ class App extends Component {
     
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Labor Trafficking Identification Tool</h1>
-        </header>
+
         <div>
         <label for="show-menu" class="show-menu">Show/Hide Menu</label>
         <input type="checkbox" id="show-menu" role="button" />
+        <img src={logo} className="topDivHL" alt="logo" />
+        <h3 class ="topDivH"> Labor Trafficking Identification Tool </h3>
         <ul id="menu" class="menu">
         <li class="lis"><a onClick= {this._onCompleteClick}><strong>Home</strong></a></li>
         <li class="lis"><a onClick= {this._onAssessClick}><strong>Assess</strong></a></li>
@@ -415,7 +422,15 @@ class App extends Component {
         <li class="lis"><a onClick= {this._onVictimClick}><strong>Victim Services</strong></a></li>
         </ul>
         </div>
-        
+
+        <br></br>
+        <br></br>
+        <br></br>
+        <br></br>
+
+        <header className="App-header">
+          <h1 className="App-title">Labor Trafficking Identification Tool</h1>
+        </header>
 
         {this.state.page == 1 ? this.renderHome() : this.state.page == 2 ? this.renderAssessment() : 
           this.state.page == 3 ? this.renderPrepare() : this.state.page == 4 ? this.renderAssessmentSteps() :

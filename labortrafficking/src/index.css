@@ -236,6 +236,7 @@ body {
     list-style-type:none;
     margin:0;
     padding:0;
+    float: right;
     position: relative;
     display: inline-block;
 }
@@ -253,14 +254,18 @@ body {
     text-align: center;
     line-height: 50px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: #fff;
-    background: #2f3036;
+    color: black;
+    background: #0000;
     text-decoration: none;
     cursor: pointer;
 }
 /*Hover state for top level links*/
 .lis:hover a {
-    background: #19c589;
+  border-bottom: 3px solid #19c589;
+}
+
+.lis a.active {
+  border-bottom: 3px solid #19c589;
 }
 
 /*Style 'show menu' label button and hide it by default*/
@@ -322,4 +327,58 @@ input[type=checkbox]:checked ~ #menu{
 }
 .btn-group .button1:hover {
     background-color: #708090;
+}
+
+.topDivH {
+  float: left;
+}
+
+.topDivHL {
+  float: left;
+  animation: App-logo-spin infinite 20s linear;
+  height: 60px;
+}
+
+.ButBar {
+  background-color: #222;
+  height: 300px;
+  width: 100%;
+}
+
+.button1 {
+    position: relative;
+    background-color: #19c589;
+    border: none;
+    float: left;
+    font-size: 23px;
+    color: #FFFFFF;
+    width: 150px;
+    height: 50px;
+    margin-left: 20px;
+    text-align: center;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    text-decoration: none;
+    overflow: hidden;
+    cursor: pointer;
+}
+
+.button1:after {
+    content: "";
+    background: #f1f1f1;
+    display: block;
+    position: absolute;
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px !important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.button1:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 0s
 }
