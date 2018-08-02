@@ -231,14 +231,19 @@ body {
   color: white;
 }
 
+.topRow {
+  min-height: 20px;
+  overflow: hidden;
+}
+
 /*Strip the ul of padding and list styling*/
 .menu {
     list-style-type:none;
     margin:0;
-    padding:0;
     float: right;
     position: relative;
     display: inline-block;
+    padding-bottom: 10px;
 }
 /*Create a horizontal list with spacing*/
 .lis {
@@ -259,6 +264,8 @@ body {
     text-decoration: none;
     cursor: pointer;
 }
+
+
 /*Hover state for top level links*/
 .lis:hover a {
   border-bottom: 3px solid #19c589;
@@ -267,6 +274,7 @@ body {
 .lis a.active {
   border-bottom: 3px solid #19c589;
 }
+
 
 /*Style 'show menu' label button and hide it by default*/
 .show-menu {
@@ -277,6 +285,7 @@ body {
     text-align: center;
     padding: 10px 0;
     display: none;
+    position: relative;
     cursor: pointer;
 }
 /*Hide checkbox*/
@@ -292,7 +301,7 @@ input[type=checkbox]:checked ~ #menu{
 @media screen and (max-width : 760px){
     /*Make dropdown links appear inline*/
     .menu {
-        position: static;
+        position: relative;
         display: none;
     }
     /*Create vertical spacing*/
@@ -331,12 +340,16 @@ input[type=checkbox]:checked ~ #menu{
 
 .topDivH {
   float: left;
+  padding-left: 20px;
+  text-align: left;
 }
 
 .topDivHL {
   float: left;
   animation: App-logo-spin infinite 20s linear;
   height: 60px;
+  padding-left: 10px;
+
 }
 
 .ButBar {
