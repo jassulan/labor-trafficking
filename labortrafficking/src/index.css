@@ -5,7 +5,7 @@
 body {
   margin: 0;
   padding: 0;
-  background: #eee;
+  background: white;
   font-family: sans-serif;
 }
 
@@ -234,6 +234,7 @@ body {
 .topRow {
   min-height: 20px;
   overflow: hidden;
+  background-color: #14558F;
 }
 
 /*Strip the ul of padding and list styling*/
@@ -259,7 +260,7 @@ body {
     text-align: center;
     line-height: 50px;
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
-    color: black;
+    color: white;
     background: #0000;
     text-decoration: none;
     cursor: pointer;
@@ -280,7 +281,7 @@ body {
 .show-menu {
     font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
     text-decoration: none;
-    color: #fff;
+    color: white;
     background: #19c589;
     text-align: center;
     padding: 10px 0;
@@ -342,6 +343,9 @@ input[type=checkbox]:checked ~ #menu{
   float: left;
   padding-left: 20px;
   text-align: left;
+  color: white;
+  font-family: sans-serif;
+  font-weight: normal;
 }
 
 .topDivHL {

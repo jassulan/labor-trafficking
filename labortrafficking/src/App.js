@@ -440,7 +440,7 @@ class App extends Component {
       
         <div class="topRow">
         <img src={logo} className="topDivHL" alt="logo" />
-        <h3 class ="topDivH"> Labor Trafficking Identification Tool </h3>
+        <h3 class ="topDivH"> Mass.gov </h3>
         </div>
 
         <div class="topRow">
