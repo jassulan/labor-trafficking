@@ -3,7 +3,12 @@ import logo from './logo.svg';
 import instructions from './instructions.jpg';
 import './App.css';
 import Question from './components/Question';
-import quizQuestions from './api/quizQuestions';
+import SeriousHarmquizQuestions from './api/SeriousHarmquizQuestions';
+import AbuseofLawquizQuestions from './api/AbuseofLawquizQuestions';
+import ExtortionquizQuestions from './api/ExtortionquizQuestions';
+import FinancialHarmquizQuestions from './api/FinancialHarmquizQuestions';
+import RestraintquizQuestions from './api/RestraintquizQuestions';
+import IdentityDocumentsquizQuestions from './api/IdentityDocumentsquizQuestions';
 import Quiz from './components/Quiz';
 import Result from './components/Result';
 import update from 'react-addons-update';
@@ -18,6 +23,7 @@ class App extends Component {
     this.state = {
      counter: 0,
      questionId: 1,
+     qcategory: 1,
      question: '',
      answerOptions: [],
      answer: '',
@@ -36,7 +42,12 @@ class App extends Component {
     this._onAssessClick = this._onAssessClick.bind(this);
     this._onStartClick = this._onStartClick.bind(this);
     this._onPrepareClick = this._onPrepareClick.bind(this);
-    this.QuizFunc = this.QuizFunc.bind(this);
+    this.sHarmQuizFunc = this.sHarmQuizFunc.bind(this);
+    this.restraintQuizFunc = this.restraintQuizFunc.bind(this);
+    this.abuseQuizFunc = this.abuseQuizFunc.bind(this);
+    this.identitydocQuizFunc = this.identitydocQuizFunc.bind(this);
+    this.extortionQuizFunc = this.extortionQuizFunc.bind(this);
+    this.fharmQuizFunc = this.fharmQuizFunc.bind(this);
     this._onCompleteClick = this._onCompleteClick.bind(this);
     this._onInvestigateClick = this._onInvestigateClick.bind(this);
     this._onVictimClick = this._onVictimClick.bind(this);
@@ -44,14 +55,56 @@ class App extends Component {
   }
   
 
-  componentWillMount() {
-    const shuffledAnswerOptions = quizQuestions.map((question) => this.shuffleArray(question.answers));  
+  // cwm() {
+  //   if (this.state.qcategory == 1) {
+  //     const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
 
-    this.setState({
-      question: quizQuestions[0].question,
-      answerOptions: shuffledAnswerOptions[0]
-    });
-  }
+  //     this.setState({
+  //       question: SeriousHarmquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 2) {
+  //     const shuffledAnswerOptions = RestraintquizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+  //     this.setState({
+  //       question: RestraintquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 3) {
+  //     const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+  //     this.setState({
+  //       question: AbuseofLawquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 4) {
+  //     const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+  //     this.setState({
+  //       question: IdentityDocumentsquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 5) {
+  //     const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+  //     this.setState({
+  //       question: ExtortionquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 6) {
+  //     const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
+
+  //     this.setState({
+  //       question: FinancialHarmquizQuestions[0].question,
+  //       answerOptions: shuffledAnswerOptions[0]
+  //     });
+  //   }
+  // }
 
   shuffleArray(array) {
     return array;
@@ -98,10 +151,44 @@ class App extends Component {
     this.setState({
       counter: counter,
       questionId: questionId,
-      question: quizQuestions[counter].question,
-      answerOptions: quizQuestions[counter].answers,
       answer: ''
     });
+    if (this.state.qcategory == 1) {
+      this.setState({
+        question: SeriousHarmquizQuestions[counter].question,
+        answerOptions: SeriousHarmquizQuestions[counter].answers
+      });
+    }
+    else if (this.state.qcategory == 2) {
+      this.setState({
+        question: RestraintquizQuestions[counter].question,
+        answerOptions: RestraintquizQuestions[counter].answers
+      });
+    }
+    else if (this.state.qcategory == 3) {
+      this.setState({
+        question: AbuseofLawquizQuestions[counter].question,
+        answerOptions: AbuseofLawquizQuestions[counter].answers
+      });
+    }
+    else if (this.state.qcategory == 4) {
+      this.setState({
+        question: IdentityDocumentsquizQuestions[counter].question,
+        answerOptions: IdentityDocumentsquizQuestions[counter].answers
+      });
+    }
+    else if (this.state.qcategory == 5) {
+      this.setState({
+        question: ExtortionquizQuestions[counter].question,
+        answerOptions: ExtortionquizQuestions[counter].answers
+      });
+    }
+    else if (this.state.qcategory == 6) {
+      this.setState({
+        question: FinancialHarmquizQuestions[counter].question,
+        answerOptions: FinancialHarmquizQuestions[counter].answers
+      });
+    }
   }
 
   getResults() {
@@ -126,9 +213,25 @@ class App extends Component {
 
   handleAnswerSelected(event) {
     this.setUserAnswer(event.currentTarget.value);
-    if (this.state.questionId < quizQuestions.length) {
+    if (this.state.questionId < SeriousHarmquizQuestions.length && this.state.qcategory == 1) {
         setTimeout(() => this.setNextQuestion(), 300);
-      } else {
+      } 
+      else if (this.state.questionId < RestraintquizQuestions.length && this.state.qcategory == 2) {
+        setTimeout(() => this.setNextQuestion(), 300);
+      } 
+      else if (this.state.questionId < AbuseofLawquizQuestions.length && this.state.qcategory == 3) {
+        setTimeout(() => this.setNextQuestion(), 300);
+      } 
+      else if (this.state.questionId < IdentityDocumentsquizQuestions.length && this.state.qcategory == 4) {
+        setTimeout(() => this.setNextQuestion(), 300);
+      } 
+      else if (this.state.questionId < ExtortionquizQuestions.length && this.state.qcategory == 5) {
+        setTimeout(() => this.setNextQuestion(), 300);
+      } 
+      else if (this.state.questionId < FinancialHarmquizQuestions.length && this.state.qcategory == 6) {
+        setTimeout(() => this.setNextQuestion(), 300);
+      } 
+      else {
         setTimeout(() => this.setResults(this.getResults()), 300);
       }
   }
@@ -141,7 +244,9 @@ class App extends Component {
         answerOptions={this.state.answerOptions}
         questionId={this.state.questionId}
         question={this.state.question}
-        questionTotal={quizQuestions.length}
+        questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+          RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+          IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
         onAnswerSelected={this.handleAnswerSelected}
       />
       <br></br><br></br>
@@ -248,10 +353,71 @@ class App extends Component {
     });
   }
 
-  QuizFunc() {
+  sHarmQuizFunc() {
+    const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
       page: 5,
+      questionId: 1,
+      question: SeriousHarmquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 1
     });
+    
+  }
+  restraintQuizFunc() {
+    const shuffledAnswerOptions = RestraintquizQuestions.map((question) => this.shuffleArray(question.answers));      
+    this.setState({
+      page: 5,
+      questionId: 1,
+      question: RestraintquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 2
+    });
+    
+  }
+  abuseQuizFunc() {
+    const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    this.setState({
+      page: 5,
+      questionId: 1,
+      question: AbuseofLawquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 3
+    });
+    
+  }
+  identitydocQuizFunc() {
+    const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    this.setState({
+      page: 5,
+      questionId: 1,
+      question: IdentityDocumentsquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 4
+    });
+    
+  }
+  extortionQuizFunc() {
+    const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    this.setState({
+      page: 5,
+      questionId: 1,
+      question: ExtortionquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 5
+    });
+    
+  }
+  fharmQuizFunc() {
+    const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    this.setState({
+      page: 5,
+      questionId: 1,
+      question: FinancialHarmquizQuestions[0].question,
+      answerOptions: shuffledAnswerOptions[0],
+      qcategory: 6
+    });
+    
   }
 
   _onCompleteClick() {
@@ -471,17 +637,17 @@ class App extends Component {
     return (
       <div class = "prep">
       <p className="asse"><strong>Assessment Steps</strong></p>
-      <button class="btn category" onClick = {this.QuizFunc}>Serious Harm</button>
+      <button class="btn category" onClick = {this.sHarmQuizFunc}>Serious Harm</button>
       <br></br><br></br>
-      <button class="btn category" onClick = {this.QuizFunc}>Physical Restraint</button>
+      <button class="btn category" onClick = {this.restraintQuizFunc}>Restraint</button>
       <br></br><br></br>
-      <button class="btn category" onClick = {this.QuizFunc}>Legal Abuse</button>
+      <button class="btn category" onClick = {this.abuseQuizFunc}>Abuse of Law</button>
       <br></br><br></br>
-      <button class="btn category" onClick = {this.QuizFunc}>Extortion</button>
+      <button class="btn category" onClick = {this.identitydocQuizFunc}>Identity Documents</button>
       <br></br><br></br>
-      <button class="btn category" onClick = {this.QuizFunc}>Financial Harm</button>
+      <button class="btn category" onClick = {this.extortionQuizFunc}>Extortion</button>
       <br></br><br></br>
-      <button class="btn category" onClick = {this.QuizFunc}>Identity Documents</button>
+      <button class="btn category" onClick = {this.fharmQuizFunc}>Financial Harm</button>
       <br></br><br></br><br></br>
       <button class="button"  onClick = {this._onCompleteClick}>Complete</button>
       </div>
