@@ -1,6 +1,10 @@
 import React, { Component } from 'react';
 import logo from './logo.svg';
 import instructions from './instructions.jpg';
+import instructions1 from './instructions1.jpg';
+import instructions2 from './instructions2.jpg';
+import instructions3 from './instructions3.jpg';
+import instructions4 from './instructions4.jpg';
 import './App.css';
 import Question from './components/Question';
 import SeriousHarmquizQuestions from './api/SeriousHarmquizQuestions';
@@ -40,7 +44,6 @@ class App extends Component {
     };
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this._onAssessClick = this._onAssessClick.bind(this);
-    this._onStartClick = this._onStartClick.bind(this);
     this._onPrepareClick = this._onPrepareClick.bind(this);
     this.sHarmQuizFunc = this.sHarmQuizFunc.bind(this);
     this.restraintQuizFunc = this.restraintQuizFunc.bind(this);
@@ -289,7 +292,7 @@ class App extends Component {
             <div className="actions">
               <div className="btn-group">
                 <button className="button1" onClick={this.downloadPdf}>Download PDF</button>
-                <button className="button1" onClick={this._onStartClick}>Next Category</button>
+                <button className="button1" onClick={this._onAssessClick}>Next Category</button>
                 <button className="button1" onClick={() => { console.log("modal closed ");
                 close(); this._onCompleteClick();}}>
                 Exit
@@ -311,10 +314,25 @@ class App extends Component {
         <p className="HomeHead1">A tool to help investigators identify labor trafficking under Massachusetts law.<br></br></p>
         <div className="buttonContainer">
           <button type="button" class="button1" onClick={this._onPrepareClick}>Prepare</button>
-          <button type="button" onClick={this._onStartClick} class="button1">Begin</button>
+          <button type="button" onClick={this._onAssessClick} class="button1">Begin</button>
         </div>
       </div>
-      <img src={instructions} alt="Description" className = "Desc-Image"/>
+      <picture>
+        <source srcset={instructions1} media= "(max-width: 760px)"/>
+        <img src={instructions} alt="Instructions" className = "Desc-Image"/>
+      </picture>
+      <picture>
+        <source srcset={instructions2} media= "(max-width: 760px)"/>
+        <img src="" className = "Desc-Image"/>
+      </picture>
+      <picture>
+        <source srcset={instructions3} media= "(max-width: 760px)"/>
+        <img src="" className = "Desc-Image"/>
+      </picture>
+      <picture>
+        <source srcset={instructions4} media= "(max-width: 760px)"/>
+        <img src="" className = "Desc-Image"/>
+      </picture>
       </div>
     );
   }
@@ -336,27 +354,22 @@ class App extends Component {
     }
   }
 
-  _onAssessClick() {
+  _onPrepareClick() {
     this.setState({
       page: 2,
     });
   }
 
-  _onPrepareClick() {
+  _onAssessClick() {
     this.setState({
       page: 3,
-    });
-  }
-  _onStartClick() {
-    this.setState({
-      page: 4,
     });
   }
 
   sHarmQuizFunc() {
     const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: SeriousHarmquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -367,7 +380,7 @@ class App extends Component {
   restraintQuizFunc() {
     const shuffledAnswerOptions = RestraintquizQuestions.map((question) => this.shuffleArray(question.answers));      
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: RestraintquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -378,7 +391,7 @@ class App extends Component {
   abuseQuizFunc() {
     const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: AbuseofLawquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -389,7 +402,7 @@ class App extends Component {
   identitydocQuizFunc() {
     const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: IdentityDocumentsquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -400,7 +413,7 @@ class App extends Component {
   extortionQuizFunc() {
     const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: ExtortionquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -411,7 +424,7 @@ class App extends Component {
   fharmQuizFunc() {
     const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
     this.setState({
-      page: 5,
+      page: 4,
       questionId: 1,
       question: FinancialHarmquizQuestions[0].question,
       answerOptions: shuffledAnswerOptions[0],
@@ -422,19 +435,19 @@ class App extends Component {
 
   _onCompleteClick() {
     this.setState({
-      page: 6,
+      page: 1,
     });
   }
 
   _onInvestigateClick() {
     this.setState({
-      page: 7,
+      page: 5,
     });
   }
 
   _onVictimClick() {
     this.setState({
-      page: 8,
+      page: 6,
     });
   }
 
@@ -445,11 +458,11 @@ class App extends Component {
       <p style={{'font-size': '20px'}}><center>Step 1</center></p>
       <p className="asse">Prepare for Assessment</p>
       <p className="disc">If you are a law enforcement investigator, these are the steps to think about when you prepare your investigation. If you are not law enforcement, please also consider where you will hand your assessment report off when you are done. </p>
-      <button className="button2">Skip and Begin</button>
+      <button className="button2" onClick = {this._onAssessClick}>Skip and Begin</button>
       </div>
 
       <div className="prep1">
-      <p style={{'padding-bottom': '10px'}}><strong>Preliminary Interview Information</strong></p>
+      <p style={{'padding-bottom': '10px', 'width' : '100%'}}><strong>Preliminary Interview Information</strong></p>
 
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>Tip 1: Develop trust.</button>
@@ -627,7 +640,7 @@ class App extends Component {
       </div>
 
       <br></br><br></br><br></br>
-      <button class="button" onClick = {this._onStartClick}>Begin</button>
+      <button class="button" onClick = {this._onAssessClick}>Begin</button>
       </div>
       </div>
     );
@@ -682,26 +695,26 @@ class App extends Component {
     );
   }
 
-  renderAssessment() {
-    return (
-    <div className="Assess">
-      <p className="asse">
-          <strong>Assessment</strong>
-      </p>
-      <button type="button" class="button" onClick={this._onPrepareClick}>Prepare</button>
-      <br></br>
-      <br></br>
-      <br></br>
-      <button type="button" onClick={this._onStartClick} class="button">Start</button>
-    </div>
-    );
-  }
+  // renderAssessment() {
+  //   return (
+  //   <div className="Assess">
+  //     <p className="asse">
+  //         <strong>Assessment</strong>
+  //     </p>
+  //     <button type="button" class="button" onClick={this._onPrepareClick}>Prepare</button>
+  //     <br></br>
+  //     <br></br>
+  //     <br></br>
+  //     <button type="button" onClick={this._onAssessClick} class="button">Start</button>
+  //   </div>
+  //   );
+  // }
 
   renderNavHome() {
     return (
       <ul id="menu" class="menu">
         <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>HOME</strong></a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>PREPARE</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
         <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
@@ -712,8 +725,8 @@ class App extends Component {
   renderNavPrepare() {
     return (
       <ul id="menu" class="menu">
-        <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>HOME</strong></a></li>
-        <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>PREPARE</strong></a></li>
+        <li class="lis"><a onClick= {this._onCompleteClick}><strong>HOME</strong></a></li>
+        <li class="lis"><a class="active" onClick= {this._onPrepareClick}><strong>PREPARE</strong></a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
         <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
@@ -725,7 +738,7 @@ class App extends Component {
     return (
       <ul id="menu" class="menu">
         <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>PREPARE</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a class="active" onClick= {this._onAssessClick}><strong>ASSESS</strong></a></li>
         <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
@@ -737,7 +750,7 @@ class App extends Component {
     return (
       <ul id="menu" class="menu">
         <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>PREPARE</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
         <li class="lis"><a class="active" onClick= {this._onInvestigateClick}><strong>INVESTIGATE</strong></a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
@@ -749,7 +762,7 @@ class App extends Component {
     return (
       <ul id="menu" class="menu">
         <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>PREPARE</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
         <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a class="active" onClick= {this._onVictimClick}><strong>VICTIM SERVICES</strong></a></li>
@@ -771,17 +784,16 @@ class App extends Component {
         <div class="topRow1">
         <label for="show-menu" class="show-menu">Show/Hide Menu</label>
         <input type="checkbox" id="show-menu" role="button" />
-        {this.state.page == 2 || this.state.page == 3 || this.state.page == 4
-          || this.state.page == 5 ? this.renderNavAsses() : 
-          this.state.page == 7 ? this.renderNavInvestigate() : this.state.page == 8 ?
+        {this.state.page == 2 ? this.renderNavPrepare() : this.state.page == 3 || this.state.page == 4 ?
+          this.renderNavAsses() : this.state.page == 5 ? this.renderNavInvestigate() : this.state.page == 6 ?
           this.renderNavVictim() : this.renderNavHome()}
         </div>
         </div>
 
-        {this.state.page == 1 ? this.renderHome() : this.state.page == 2 ? this.renderAssessment() : 
-          this.state.page == 3 ? this.renderPrepare() : this.state.page == 4 ? this.renderAssessmentSteps() :
-          this.state.page == 5 ? (this.state.result ? this.renderResult() : this.renderQuiz()) : this.state.page == 7 ?
-          this.renderInvestigate() : this.state.page == 8 ? this.renderVictim() : this.renderHome()}
+        {this.state.page == 1 ? this.renderHome() : this.state.page == 2 ? this.renderPrepare() : 
+          this.state.page == 3 ? this.renderAssessmentSteps() : this.state.page == 4 ? (this.state.result ? 
+          this.renderResult() : this.renderQuiz()) : this.state.page == 5 ?
+          this.renderInvestigate() : this.state.page == 6 ? this.renderVictim() : this.renderHome()}
       </div>
     );
   }
