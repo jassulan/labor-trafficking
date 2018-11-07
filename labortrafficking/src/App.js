@@ -691,7 +691,7 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Harm” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.sHarmQuizFunc}>Start “Harm” Questions →</button>
 
       </div>
       </div>
@@ -711,7 +711,7 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Restraint” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.restraintQuizFunc}>Start “Restraint” Questions →</button>
         </div>
       </div>
 
@@ -737,7 +737,7 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Abuse of Law” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.abuseQuizFunc}>Start “Abuse of Law” Questions →</button>
       </div>
       </div>
 
@@ -755,7 +755,7 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Identity Documents” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.identitydocQuizFunc}>Start “Identity Documents” Questions →</button>
       </div>
       </div>
 
@@ -784,7 +784,7 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Extortion” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.extortionQuizFunc}>Start “Extortion” Questions →</button>
       </div>
       </div>
 
@@ -808,13 +808,13 @@ class App extends Component {
         <hr></hr>
         <a href="#">Link to Massachusetts Statute→</a>
         <br></br><br></br><br></br>
-        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Financial Harm” Questions →</button>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this.fharmQuizFunc}>Start “Financial Harm” Questions →</button>
       </div>
       </div>
 
       <br></br>
       
-      <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onAssessClick}>Final Evaluation</button>
+      <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onCompleteClick}>Final Evaluation</button>
       </div>
       </div>
     );
