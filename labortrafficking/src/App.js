@@ -455,10 +455,12 @@ class App extends Component {
     return (
     <div>
       <div class = "prep">
+      <div style = {{'text-align' : 'center'}}>
       <p style={{'font-size': '20px'}}><center>Step 1</center></p>
       <p className="asse">Prepare for Assessment</p>
       <p className="disc">If you are a law enforcement investigator, these are the steps to think about when you prepare your investigation. If you are not law enforcement, please also consider where you will hand your assessment report off when you are done. </p>
       <button className="button2" onClick = {this._onAssessClick}>Skip and Begin</button>
+      </div>
       </div>
 
       <div className="prep1">
@@ -647,6 +649,178 @@ class App extends Component {
   }
 
   renderAssessmentSteps() {
+    return (
+    <div>
+      <div class = "prep">
+      <div style = {{'text-align': 'center'}}>
+      <p style={{'font-size': '20px'}}><center>Step 2</center></p>
+      <p className="asse">Assessment</p>
+      </div>
+      <p className="disc"><strong>Communication of information by, in, to or through this website and your receipt or use of it</strong></p>
+      <div className="disc">
+      <ol style = {{'font-size' : '17px', 'float': 'right'}}>
+          <i><li>is not provided in the course of and does not create or constitute an attorney-client relationship</li></i>
+          <i><li>is not intended as a solicitation</li></i>
+          <i><li>is not intended to convey or constitute legal advice, and</li></i>
+          <i><li>is not a substitute for obtaining legal advice from a qualified attorney</li></i>
+      </ol>
+      </div>
+      <p className="disc"><strong>You should not act upon any such information without first seeking qualified professional counsel on the specific matter. </strong></p>
+
+      </div>
+
+      <div className="prep1" style = {{'background-color' : '#eee'}}>
+
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>HARM: <br></br><i>causes or threatens to cause serious harm to any person</i></button>
+      <div class="panel1">
+        <ul>
+          <li><strong>Lay Definition :</strong> Serious harm is not defined under Massachusetts law, but federal law is persuasive authority. Under
+              federal law, serious harm can be physical and nonphysical, and includes psychological, financial,
+              economic, or reputational harm. Generally, the test contemplates whether it is sufficiently serious, under all
+              the surrounding circumstances, to compel a reasonable person of the same background and in the same
+              circumstances to perform or to continue performing labor or services in order to avoid incurring that harm.</li>
+          <br></br>
+          <li><strong>Legal Definition : </strong>Serious harm is defined federally as "any harm, whether physical or nonphysical, including psychological,
+              financial, or reputational harm, that is sufficiently serious, under all the surrounding circumstances, to
+              compel a reasonable person of the same background and in the same circumstances to perform or to
+              continue performing labor or services in order to avoid incurring that harm." 18 USC § 1589(c)(2).</li>
+          <br></br>
+          <li><strong>Examples: </strong>Subject kicks the victim to wake her up to work for her as a domestic worker.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Harm” Questions →</button>
+
+      </div>
+      </div>
+
+      <br></br><br></br><br></br>
+
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>RESTRAINT: <br></br><i>physically restrains or threatens to physically restrain another person</i></button>
+      <div class="panel1">
+        <ul>
+          <li><strong>Lay Definition :</strong> Physical restraint means purposely limiting or obstructing the freedom of a person's bodily movement.
+              This can include using locks on doors or windows to more subtle forms of control that restrict another
+              person’s ability to move around.</li>
+          <br></br>
+          <li><strong>Examples: </strong>The subject locks the victim in the restaurant in the morning and requires her to cook and clean.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Restraint” Questions →</button>
+        </div>
+      </div>
+
+      <br></br><br></br><br></br>
+      
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>ABUSE OF LAW: <br></br><i>abuses or threatens to abuse the law or legal process</i></button>
+      <div class="panel1">
+        <ul>
+          <li><strong>Lay Definition :</strong> Abuse of the legal process is not defined under Massachusetts law but federal law is persuasive authority.
+              Federally, abuse of the legal process includes the use or threatened use of a law or legal process, whether
+              administrative, civil, or criminal, in any manner or for any purpose for which the law was not designed.
+              Common examples are deportation threats, whether subtle or overt. Click here to view the federal
+              definition of abuse of the legal process.</li>
+          <br></br>
+          <li><strong>Legal Definition : </strong>Abuse of the legal process is defined federally as "the use or threatened use of a law or legal process,
+              whether administrative, civil, or criminal, in any manner or for any purpose for which the law was not
+              designed, in order to exert pressure on another person to cause that person to take some action or refrain
+              from taking some action." 22 U.S.C. § 7102(1).</li>
+          <br></br>
+          <li><strong>Examples: </strong>The subject threatens the victim with deportation if she stops working.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Abuse of Law” Questions →</button>
+      </div>
+      </div>
+
+      <br></br><br></br><br></br>
+      
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>IDENTITY DOCUMENTS: <br></br><i>knowingly destroys, conceals, removes, confiscates or possesses any actual or purported passport or other immigration document, or any other actual or purported government identification document, of another person</i></button>
+      <div class="panel1">
+      <ul>
+          <li><strong>Lay Definition :</strong> This includes taking someone's passport for any period of time, even if it is brief. In addition, it can include
+              the tearing or mutilating of identity documents.</li>
+          <br></br>
+          <li><strong>Examples: </strong>The subject takes the victim's passport and holds it while working for him.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Identity Documents” Questions →</button>
+      </div>
+      </div>
+
+      <br></br><br></br><br></br>
+      
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>EXTORTION: <br></br><i>engages in extortion under Massachusetts law</i></button>
+      <div class="panel1">
+        <ul>
+          <li><strong>Lay Definition :</strong>Extortion generally is the practice of trying to get something through force, threats, or blackmail. For
+              example, extortion might be involved if a subject threatens to release embarrassing photographs, unless
+              the victim continues to work.</li>
+          <br></br>
+          <li><strong>Legal Definition : </strong>Massachusetts General Laws define extortion as involving "[w]hoever, verbally or by a written or printed
+              communication, maliciously threatens to accuse another of a crime or offence, or by a verbal or written or
+              printed communication maliciously threatens an injury to the person or property of another, or any police officer
+              or person having the powers of a police officer, or any officer, or employee of any licensing authority who
+              verbally or by written or printed communication maliciously and unlawfully uses or threatens to use against
+              another the power or authority vested in him, with intent thereby to extort money or any pecuniary advantage, or
+              with intent to compel any person to do any act against his will, shall be punished by imprisonment in the state
+              prison for not more than fifteen years, or in the house of correction for not more than two and one half years, or
+              by a fine of not more than five thousand dollars, or both." Mass. Gen. Laws Ch. 265, § 25.</li>
+          <br></br>
+          <li><strong>Examples: </strong>The subject threatens to send compromising photographs of the victim to the media if she refuses to work.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Extortion” Questions →</button>
+      </div>
+      </div>
+
+      <br></br><br></br><br></br>
+      
+      <div className="collap">
+      <button class="accordion1" onClick = {this.prepareFunc}>FINANCIAL HARM: <br></br><i>causes or threatens to cause financial harm to any person</i></button>
+      <div class="panel1">
+        <ul>
+          <li><strong>Lay Definition :</strong> Financial harm is involved if the subject puts the victim in a detrimental position in relation to wealth,
+              property, or other monetary benefits through extortion, criminal usury, or illegal employment contracts.
+              This might include a situation where the subject uses an illegal employment contract to lure a victim to
+              work in demeaning conditions.</li>
+          <br></br>
+          <li><strong>Legal Definition : </strong>Financial harm is defined as "a detrimental position in relation to wealth, property or other monetary benefits
+              that occurs as a result of another person's illegal act including, but not limited to, extortion under Mass. Gen.
+              Laws Ch. 265, Sec. 49 (“Criminal Usury”) or illegal employment contracts." Mass. Gen. Laws Ch. 265, § 49.</li>
+          <br></br>
+          <li><strong>Examples: </strong>The subject runs up a debt of $10,000 on credit cards in the victim's name and says she has to work to pay it off.</li>
+        </ul>
+        <hr></hr>
+        <a href="#">Link to Massachusetts Statute→</a>
+        <br></br><br></br><br></br>
+        <button class="button" style = {{'font-size' : '18px', 'justify-text' : 'center'}} onClick = {this._onAssessClick}>Start “Financial Harm” Questions →</button>
+      </div>
+      </div>
+
+      <br></br>
+      
+      <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onAssessClick}>Final Evaluation</button>
+      </div>
+      </div>
+    );
+  }
+
+  renderAssessmentSteps1() {
     return (
       <div class = "prep">
       <p className="asse"><strong>Assessment Steps</strong></p>
