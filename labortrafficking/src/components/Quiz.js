@@ -20,7 +20,7 @@ function Quiz(props) {
   }
 
   return (
-      <div key={props.questionId}>
+      <div key={props.questionId} style = {{'background-color': '#c3def4'}}>
         <QuestionCount
           counter={props.questionId}
           total={props.questionTotal}
