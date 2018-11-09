@@ -520,7 +520,7 @@ input[type=checkbox]:checked ~ #menu{
 
 
 /*Responsive Styles*/
-@media screen and (max-width : 760px){
+@media screen and (max-width : 800px){
     /*Make dropdown links appear inline*/
     .menu {
         position: relative;
