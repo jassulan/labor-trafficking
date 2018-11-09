@@ -1335,7 +1335,7 @@ class App extends Component {
   renderAssessmentSteps() {
     return (
     <div>
-      <div class = "prep">
+      <div class = "prepX">
       <div style = {{'text-align': 'center'}}>
       <p style={{'font-size': '20px'}}><center>Step 2</center></p>
       <p className="asse">Assessment</p>
