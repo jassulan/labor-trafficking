@@ -5,6 +5,9 @@ import instructions1 from './instructions1.jpg';
 import instructions2 from './instructions2.jpg';
 import instructions3 from './instructions3.jpg';
 import instructions4 from './instructions4.jpg';
+import YesImg from './Yes.png';
+import NoImg from './No.png';
+import MaybeImg from './Maybe.png';
 import './App.css';
 import Question from './components/Question';
 import SeriousHarmquizQuestions from './api/SeriousHarmquizQuestions';
@@ -32,7 +35,12 @@ class App extends Component {
      question: [],
      qlist: [],
      answerOptions: [],
-     answer: '',
+     HarmAnswer: [],
+     RestraintAnswer: [],
+     AbuseAnswer: [],
+     IdentityAnswer: [],
+     ExtortAnswer: [],
+     FharmAnswer: [],
      line: 0,
      page: 1,
      addpage: 0,
@@ -44,7 +52,13 @@ class App extends Component {
        Maybe: 0
      },
     };
-    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
+    this.handleHarmAnswerSelected = this.handleHarmAnswerSelected.bind(this);
+    this.handleRestraintAnswerSelected = this.handleRestraintAnswerSelected.bind(this);
+    this.handleAbuseAnswerSelected = this.handleAbuseAnswerSelected.bind(this);
+    this.handleIdentityAnswerSelected = this.handleIdentityAnswerSelected.bind(this);
+    this.handleExtortionAnswerSelected = this.handleExtortionAnswerSelected.bind(this);
+    this.handleFharmAnswerSelected = this.handleFharmAnswerSelected.bind(this);
+    this.evaluateNow = this.evaluateNow.bind(this);
     this._onAssessClick = this._onAssessClick.bind(this);
     this._onPrepareClick = this._onPrepareClick.bind(this);
     this.sHarmQuizFunc = this.sHarmQuizFunc.bind(this);
@@ -139,68 +153,68 @@ class App extends Component {
     this.state.doc.save('Assessment Results.pdf');
   }
 
-  setUserAnswer(answer) {
-    this.writePdf(answer);
-    const updatedAnswersCount = update(this.state.answersCount, {
-      [answer]: {$apply: (currentValue) => currentValue + 1}
-    });
-    this.setState({
-      answersCount: updatedAnswersCount,
-      answer: answer
-    });
-  }
+  // setUserAnswer(answer) {
+  //   this.writePdf(answer);
+  //   const updatedAnswersCount = update(this.state.answersCount, {
+  //     [answer]: {$apply: (currentValue) => currentValue + 1}
+  //   });
+  //   this.setState({
+  //     answersCount: updatedAnswersCount,
+  //     answer: answer
+  //   });
+  // }
 
-  setNextQuestion() {
-    const counter = this.state.counter + 1;
-    const questionId = this.state.questionId + 1;
-    this.setState({
-      counter: counter,
-      questionId: questionId,
-      answer: ''
-    });
-    if (this.state.qcategory == 1) {
-      this.setState({
-        question: SeriousHarmquizQuestions[counter].question,
-        qlist: (counter, SeriousHarmquizQuestions[counter].question),
-        answerOptions: SeriousHarmquizQuestions[counter].answers
-      });
-    }
-    else if (this.state.qcategory == 2) {
-      this.setState({
-        question: RestraintquizQuestions[counter].question,
-        qlist: (counter, RestraintquizQuestions[counter].question),
-        answerOptions: RestraintquizQuestions[counter].answers
-      });
-    }
-    else if (this.state.qcategory == 3) {
-      this.setState({
-        question: AbuseofLawquizQuestions[counter].question,
-        qlist: (counter, AbuseofLawquizQuestions[counter].question),
-        answerOptions: AbuseofLawquizQuestions[counter].answers
-      });
-    }
-    else if (this.state.qcategory == 4) {
-      this.setState({
-        question: IdentityDocumentsquizQuestions[counter].question,
-        qlist: (counter, IdentityDocumentsquizQuestions[counter].question),
-        answerOptions: IdentityDocumentsquizQuestions[counter].answers
-      });
-    }
-    else if (this.state.qcategory == 5) {
-      this.setState({
-        question: ExtortionquizQuestions[counter].question,
-        qlist: (counter, ExtortionquizQuestions[counter].question),
-        answerOptions: ExtortionquizQuestions[counter].answers
-      });
-    }
-    else if (this.state.qcategory == 6) {
-      this.setState({
-        question: FinancialHarmquizQuestions[counter].question,
-        qlist: (counter, FinancialHarmquizQuestions[counter].question),
-        answerOptions: FinancialHarmquizQuestions[counter].answers
-      });
-    }
-  }
+  // setNextQuestion() {
+  //   const counter = this.state.counter + 1;
+  //   const questionId = this.state.questionId + 1;
+  //   this.setState({
+  //     counter: counter,
+  //     questionId: questionId,
+  //     answer: ''
+  //   });
+  //   if (this.state.qcategory == 1) {
+  //     this.setState({
+  //       question: SeriousHarmquizQuestions[counter].question,
+  //       qlist: (counter, SeriousHarmquizQuestions[counter].question),
+  //       answerOptions: SeriousHarmquizQuestions[counter].answers
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 2) {
+  //     this.setState({
+  //       question: RestraintquizQuestions[counter].question,
+  //       qlist: (counter, RestraintquizQuestions[counter].question),
+  //       answerOptions: RestraintquizQuestions[counter].answers
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 3) {
+  //     this.setState({
+  //       question: AbuseofLawquizQuestions[counter].question,
+  //       qlist: (counter, AbuseofLawquizQuestions[counter].question),
+  //       answerOptions: AbuseofLawquizQuestions[counter].answers
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 4) {
+  //     this.setState({
+  //       question: IdentityDocumentsquizQuestions[counter].question,
+  //       qlist: (counter, IdentityDocumentsquizQuestions[counter].question),
+  //       answerOptions: IdentityDocumentsquizQuestions[counter].answers
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 5) {
+  //     this.setState({
+  //       question: ExtortionquizQuestions[counter].question,
+  //       qlist: (counter, ExtortionquizQuestions[counter].question),
+  //       answerOptions: ExtortionquizQuestions[counter].answers
+  //     });
+  //   }
+  //   else if (this.state.qcategory == 6) {
+  //     this.setState({
+  //       question: FinancialHarmquizQuestions[counter].question,
+  //       qlist: (counter, FinancialHarmquizQuestions[counter].question),
+  //       answerOptions: FinancialHarmquizQuestions[counter].answers
+  //     });
+  //   }
+  // }
 
   getResults() {
     const answersCount = this.state.answersCount;
@@ -212,39 +226,90 @@ class App extends Component {
 
   setResults (result) {
     if (result.length === 1) {
-      const a = this.state.line + 20;
-      this.state.doc.text('Labor Trafficking case: ' + String(result[0]), 10, a);
+      // const a = this.state.line + 20;
+      // this.state.doc.text('Labor Trafficking case: ' + String(result[0]), 10, a);
       this.setState({ result: result[0] });
     } else {
-      const a = this.state.line + 20;
-      this.state.doc.text('Labor Trafficking case: Maybe', 10, a);
+      // const a = this.state.line + 20;
+      // this.state.doc.text('Labor Trafficking case: Maybe', 10, a);
       this.setState({ result: 'Maybe' });
     }
   }
 
-  handleAnswerSelected(event) {
-    this.setUserAnswer(event.currentTarget.value);
-    if (this.state.questionId < SeriousHarmquizQuestions.length && this.state.qcategory == 1) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else if (this.state.questionId < RestraintquizQuestions.length && this.state.qcategory == 2) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else if (this.state.questionId < AbuseofLawquizQuestions.length && this.state.qcategory == 3) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else if (this.state.questionId < IdentityDocumentsquizQuestions.length && this.state.qcategory == 4) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else if (this.state.questionId < ExtortionquizQuestions.length && this.state.qcategory == 5) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else if (this.state.questionId < FinancialHarmquizQuestions.length && this.state.qcategory == 6) {
-        //setTimeout(() => this.setNextQuestion(), 300);
-      } 
-      else {
-        //setTimeout(() => this.setResults(this.getResults()), 300);
-      }
+  handleHarmAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      HarmAnswer: this.state.HarmAnswer.concat(answer)
+    });
+  }
+
+  handleRestraintAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      RestraintAnswer: this.state.RestraintAnswer.concat(answer)
+    });
+  }
+
+  handleAbuseAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      AbuseAnswer: this.state.AbuseAnswer.concat(answer)
+    });
+  }
+
+  handleIdentityAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      IdentityAnswer: this.state.IdentityAnswer.concat(answer)
+    });
+  }
+
+  handleExtortionAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      ExtortAnswer: this.state.ExtortAnswer.concat(answer)
+    });
+  }
+
+  handleFharmAnswerSelected(event) {
+    var answer = event.currentTarget.value;
+    //this.writePdf(answer);
+    const updatedAnswersCount = update(this.state.answersCount, {
+      [answer]: {$apply: (currentValue) => currentValue + 1}
+    });
+    this.setState({
+      answersCount: updatedAnswersCount,
+      FharmAnswer: this.state.FharmAnswer.concat(answer)
+    });
+  }
+
+  evaluateNow() {
+    setTimeout(() => this.setResults(this.getResults()), 300);
   }
 
 
@@ -267,9 +332,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -279,9 +344,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -291,9 +356,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -303,9 +368,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -315,9 +380,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -327,9 +392,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -339,9 +404,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -351,9 +416,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -363,9 +428,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -375,9 +440,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -387,9 +452,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -399,9 +464,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -411,9 +476,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleHarmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -439,9 +504,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -451,9 +516,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -463,9 +528,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -475,9 +540,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -487,9 +552,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -499,9 +564,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -511,9 +576,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -523,9 +588,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleRestraintAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -551,9 +616,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleAbuseAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -563,9 +628,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleAbuseAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -575,9 +640,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleAbuseAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -587,9 +652,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleAbuseAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -599,9 +664,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleAbuseAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -630,9 +695,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -642,9 +707,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -654,9 +719,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -666,9 +731,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -678,9 +743,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -690,9 +755,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -702,9 +767,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleIdentityAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -730,9 +795,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleExtortionAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -742,9 +807,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleExtortionAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -754,9 +819,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleExtortionAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -766,9 +831,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleExtortionAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -794,9 +859,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -806,9 +871,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -818,9 +883,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -830,9 +895,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -842,9 +907,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -854,9 +919,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -866,9 +931,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -878,9 +943,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -890,9 +955,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -902,9 +967,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -914,9 +979,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -926,9 +991,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.answer}
@@ -938,9 +1003,9 @@ class App extends Component {
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
+          onAnswerSelected={this.handleFharmAnswerSelected}
       />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}}>Evaluate</button>
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       </div>
       </div>
@@ -952,37 +1017,52 @@ class App extends Component {
         <div>
         <br></br><br></br><br></br>
         <Popup
-          trigger={<button className="button"> See Assessment Results </button>}
+          trigger={<button className="button"> See {this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
+                                              "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
+                                              this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
+                                              "EXTORTION" : "FINANCIAL HARM"} Results </button>}
           modal
-          contentStyle={{ maxWidth: "600px", width: "90%" }}>
+          contentStyle={{ maxWidth: "600px", height: "100%", width: "90%", overflow: "auto" }}>
           {close => (
           <div className="modal">
-            <div className="header"> <strong>Assessment Results </strong></div>
+            <button style = {{'font-size' : '25px', 'background-color' : 'white'}} onClick={() => { console.log("modal closed ");
+                close(); this._onCompleteClick();}}>
+                X
+                </button>
+            <center><div className="header"> <strong>Results for Category: </strong></div>
+            <div className="header"> <strong>{this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
+                                              "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
+                                              this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
+                                              "EXTORTION" : "FINANCIAL HARM"}</strong></div></center>
+            <br/>
+            <img src={YesImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
+            <img src={NoImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
+            <img src={MaybeImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
+
+            <Result quizResult={this.state.result} />
+            <br/><br/>
             <div className="content1">
-              {" "}
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Atque, a
-              nostrum. Dolorem, repellat quidem ut, minima sint vel eveniet
-              quibusdam voluptates delectus doloremque, explicabo tempore dicta
-              adipisci fugit amet dignissimos?
-              <br />
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Consequatur
-              sit commodi beatae optio voluptatum sed eius cumque, delectus saepe
-              repudiandae explicabo nemo nam libero ad, doloribus, voluptas rem
-              alias. Vitae?
-              <br></br><br></br>
-              <Result quizResult={this.state.result} />
-              <br></br><br></br>
+              <p style={{'font-size': '15px'}}><strong>Communication of information by, in, to or through this website and your receipt or use of it</strong></p>
+              <ol style = {{'font-size' : '15px', 'float': 'right'}}>
+                  <i><li>is not provided in the course of and does not create or constitute an attorney-client relationship</li></i>
+                  <i><li>is not intended as a solicitation</li></i>
+                  <i><li>is not intended to convey or constitute legal advice, and</li></i>
+                  <i><li>is not a substitute for obtaining legal advice from a qualified attorney</li></i>
+              </ol>
+              <p style={{'font-size': '15px'}}><strong>You should not act upon any such information without first seeking qualified professional
+              counsel on the specific matter.</strong></p>
+              <p>To continue answering questions in the next category, click "Continue".</p>
+              <p>To finish the assessment and download your results, click "Download".</p>
+              <p>To go back and change any of your answers, click the "X" button.</p>
+              <br></br>
             </div>
             <div className="actions">
               <div className="btn-group">
-                <button className="button1" onClick={this.downloadPdf}>Download PDF</button>
-                <button className="button1" onClick={this._onAssessClick}>Next Category</button>
-                <button className="button1" onClick={() => { console.log("modal closed ");
-                close(); this._onCompleteClick();}}>
-                Exit
-                </button>
+                <button className="button1" onClick={this._onAssessClick}>Continue</button>
+                <button className="button1" onClick={this.downloadPdf}>Download</button>
               </div>
             </div>
+            <br/>
           </div>
           )}
         </Popup>
@@ -1335,7 +1415,7 @@ class App extends Component {
   renderAssessmentSteps() {
     return (
     <div>
-      <div class = "prep">
+      <div class = "prepX">
       <div style = {{'text-align': 'center'}}>
       <p style={{'font-size': '20px'}}><center>Step 2</center></p>
       <p className="asse">Assessment</p>
@@ -1498,7 +1578,7 @@ class App extends Component {
 
       <br></br>
       
-      <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onCompleteClick}>Final Evaluation</button>
+      <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onCompleteClick}>Done</button>
       </div>
       </div>
     );
