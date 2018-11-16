@@ -176,7 +176,6 @@ body {
     cursor: pointer;
     padding: 18px;
     width: 100%;
-    height: 80px;
     height: 100%;
     border: none;
     text-align: left;
@@ -517,9 +516,207 @@ input[type=checkbox]:checked ~ #menu{
   padding-right: 25%;
 }
 
+.toggle-box {
+  display: none;
+}
+
+.toggle-box + label {
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  line-height: 21px;
+  margin-bottom: 5px;
+}
+
+.toggle-box + label + div.a {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.a {
+  display: block;
+}
+
+.toggle-box + label + div.b {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.b {
+  display: block;
+}
+
+.toggle-box + label + div.c {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.c {
+  display: block;
+}
+
+.toggle-box + label + div.d {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.d {
+  display: block;
+}
+
+.toggle-box + label + div.e {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.e {
+  display: block;
+}
+
+.toggle-box + label + div.f {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.f {
+  display: block;
+}
+
+.toggle-box + label + div.g {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.g {
+  display: block;
+}
+
+.toggle-box + label + div.h {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.h {
+  display: block;
+}
+
+.toggle-box + label + div.aa {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.aa {
+  display: block;
+}
+
+.toggle-box + label + div.bb {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.bb {
+  display: block;
+}
+
+.toggle-box + label + div.cc {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.cc {
+  display: block;
+}
+
+.toggle-box + label + div.dd {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.dd {
+  display: block;
+}
+
+.toggle-box + label + div.ee {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ee {
+  display: block;
+}
+
+.toggle-box + label + div.ff {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ff {
+  display: block;
+}
+
+.toggle-box + label + div.gg {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.gg {
+  display: block;
+}
+
+.toggle-box + label + div.hh {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.hh {
+  display: block;
+}
+
+.toggle-box + label + div.ii {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ii {
+  display: block;
+}
+
+.toggle-box + label + div.jj {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.jj {
+  display: block;
+}
+
+.toggle-box + label:before {
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #437399;
+  display: block;
+  white-space: nowrap;
+  content: "v Show More";
+  float: left;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 5px;
+  text-align: center;
+  width: 20px;
+}
+
+.toggle-box:checked  + label:before {
+  color: #437399;
+  white-space: nowrap;
+  content: "^ Show Less";
+}
+
 
 /*Responsive Styles*/
-@media screen and (max-width : 800px){
+@media screen and (max-width : 1001px){
     /*Make dropdown links appear inline*/
     .menu {
         position: relative;
@@ -545,6 +742,7 @@ input[type=checkbox]:checked ~ #menu{
     }
     .HomeHead1 {
         width: 100%;
+        padding-right: 5%;
     }
     .ButBar {
         width: 100%;
@@ -552,8 +750,9 @@ input[type=checkbox]:checked ~ #menu{
     .disc {
       width: 100%;
       padding: 0;
-      padding-left: 20px;
-      padding-right: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      display : block;
     }
     .Qquestions {
       padding: 0;
