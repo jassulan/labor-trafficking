@@ -1705,8 +1705,7 @@ class App extends Component {
 
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>HARM: <i><p style={{'font-size':'16px'}}>causes or threatens to cause 
-      serious harm to any person</p></i></button><button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.sHarmQuizFunc}>Start “Harm” Questions →</button>
+      serious harm to any person</p></i></button>
 
       <div class="panel">
         <ul>
@@ -1729,14 +1728,17 @@ class App extends Component {
       </div>
       </div>
 
-      <br/>
+      
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.sHarmQuizFunc}>Start “Harm” Questions →</button>
+      </div>
+      
+      <br/><br/>
 
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>RESTRAINT: <br></br><i><p style={{'font-size':'16px'}}>physically restrains or threatens to physically restrain another person</p></i></button>
       
-      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.restraintQuizFunc}>Start “Restraint” Questions →</button>
-
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Physical restraint means purposely limiting or obstructing the freedom of a person's bodily movement.
@@ -1751,14 +1753,16 @@ class App extends Component {
         </div>
       </div>
 
-      <br/>
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.restraintQuizFunc}>Start “Restraint” Questions →</button>
+      </div>
+      
+      <br/><br/>
 
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>ABUSE OF LAW: <br></br><i><p style={{'font-size':'16px'}}>abuses or threatens to abuse the law or legal process</p></i></button>
       
-      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.abuseQuizFunc}>Start “Abuse of Law” Questions →</button>
-
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Abuse of the legal process is not defined under Massachusetts law but federal law is persuasive authority.
@@ -1780,14 +1784,16 @@ class App extends Component {
       </div>
       </div>
 
-      <br/>
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.abuseQuizFunc}>Start “Abuse of Law” Questions →</button>
+      </div>
+      
+      <br/><br/>
       
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>IDENTITY DOCUMENTS: <br></br><i><p style={{'font-size':'16px'}}>knowingly destroys, conceals, removes, confiscates or possesses any actual or purported passport or other immigration document, or any other actual or purported government identification document, of another person</p></i></button>
       
-      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.identitydocQuizFunc}>Start “Identity Documents” Questions →</button>
-
       <div class="panel">
       <ul>
           <li><strong>Lay Definition :</strong> This includes taking someone's passport for any period of time, even if it is brief. In addition, it can include
@@ -1801,14 +1807,16 @@ class App extends Component {
       </div>
       </div>
 
-      <br/>
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.identitydocQuizFunc}>Start “Identity Documents” Questions →</button>
+      </div>
+      
+      <br/><br/>
       
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>EXTORTION: <br></br><i><p style={{'font-size':'16px'}}>engages in extortion under Massachusetts law</p></i></button>
       
-      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.extortionQuizFunc}>Start “Extortion” Questions →</button>
-
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong>Extortion generally is the practice of trying to get something through force, threats, or blackmail. For
@@ -1833,14 +1841,16 @@ class App extends Component {
       </div>
       </div>
 
-      <br/>
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.extortionQuizFunc}>Start “Extortion” Questions →</button>
+      </div>
+      
+      <br/><br/>
       
       <div className="collap">
       <button class="accordion" onClick = {this.prepareFunc}>FINANCIAL HARM: <br></br><i><p style={{'font-size':'16px'}}>causes or threatens to cause financial harm to any person</p></i></button>
       
-      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
-      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.fharmQuizFunc}>Start "Financial Harm" Questions →</button>
-
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Financial harm is involved if the subject puts the victim in a detrimental position in relation to wealth,
@@ -1860,7 +1870,12 @@ class App extends Component {
       </div>
       </div>
 
-      <br/>
+      <div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+      <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center', 
+      'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.fharmQuizFunc}>Start “Financial Harm” Questions →</button>
+      </div>
+      
+      <br/><br/>
       
       <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onCompleteClick}>Done</button>
       </div>
