@@ -600,6 +600,96 @@ input[type=checkbox]:checked ~ #menu{
   display: block;
 }
 
+.toggle-box + label + div.aa {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.aa {
+  display: block;
+}
+
+.toggle-box + label + div.bb {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.bb {
+  display: block;
+}
+
+.toggle-box + label + div.cc {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.cc {
+  display: block;
+}
+
+.toggle-box + label + div.dd {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.dd {
+  display: block;
+}
+
+.toggle-box + label + div.ee {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ee {
+  display: block;
+}
+
+.toggle-box + label + div.ff {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ff {
+  display: block;
+}
+
+.toggle-box + label + div.gg {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.gg {
+  display: block;
+}
+
+.toggle-box + label + div.hh {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.hh {
+  display: block;
+}
+
+.toggle-box + label + div.ii {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.ii {
+  display: block;
+}
+
+.toggle-box + label + div.jj {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.jj {
+  display: block;
+}
+
 .toggle-box + label:before {
   background-color: white;
   -webkit-border-radius: 10px;
@@ -652,6 +742,7 @@ input[type=checkbox]:checked ~ #menu{
     }
     .HomeHead1 {
         width: 100%;
+        padding-right: 5%;
     }
     .ButBar {
         width: 100%;
