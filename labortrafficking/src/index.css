@@ -420,15 +420,14 @@ input[type=checkbox]:checked ~ #menu{
 .btn-group .button1 {
     background-color: #19c589;
     border: 1px solid green;
-    width : 100%;
     color: white;
-    padding: 15px 32px;
+    padding-right: 15px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 15px;
     cursor: pointer;
-    float: left;
+    align-items: center;
 }
 
 
@@ -518,9 +517,117 @@ input[type=checkbox]:checked ~ #menu{
   padding-right: 25%;
 }
 
+.toggle-box {
+  display: none;
+}
+
+.toggle-box + label {
+  cursor: pointer;
+  display: block;
+  font-weight: bold;
+  line-height: 21px;
+  margin-bottom: 5px;
+}
+
+.toggle-box + label + div.a {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.a {
+  display: block;
+}
+
+.toggle-box + label + div.b {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.b {
+  display: block;
+}
+
+.toggle-box + label + div.c {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.c {
+  display: block;
+}
+
+.toggle-box + label + div.d {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.d {
+  display: block;
+}
+
+.toggle-box + label + div.e {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.e {
+  display: block;
+}
+
+.toggle-box + label + div.f {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.f {
+  display: block;
+}
+
+.toggle-box + label + div.g {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.g {
+  display: block;
+}
+
+.toggle-box + label + div.h {
+  display: none;
+  margin-bottom: 10px;
+}
+
+.toggle-box:checked + label + div.h {
+  display: block;
+}
+
+.toggle-box + label:before {
+  background-color: white;
+  -webkit-border-radius: 10px;
+  -moz-border-radius: 10px;
+  border-radius: 10px;
+  color: #437399;
+  display: block;
+  white-space: nowrap;
+  content: "v Show More";
+  float: left;
+  font-weight: bold;
+  height: 20px;
+  line-height: 20px;
+  margin-right: 5px;
+  text-align: center;
+  width: 20px;
+}
+
+.toggle-box:checked  + label:before {
+  color: #437399;
+  white-space: nowrap;
+  content: "^ Show Less";
+}
+
 
 /*Responsive Styles*/
-@media screen and (max-width : 800px){
+@media screen and (max-width : 1001px){
     /*Make dropdown links appear inline*/
     .menu {
         position: relative;
@@ -553,8 +660,9 @@ input[type=checkbox]:checked ~ #menu{
     .disc {
       width: 100%;
       padding: 0;
-      padding-left: 20px;
-      padding-right: 20px;
+      margin-right: auto;
+      margin-left: auto;
+      display : block;
     }
     .Qquestions {
       padding: 0;
