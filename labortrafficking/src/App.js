@@ -31,10 +31,7 @@ class App extends Component {
      counter: 0,
      questionId: 1,
      qcategory: 1,
-     qcount: -1,
-     temp: '',
      question: [],
-     qnum: -1,
      chkpt1: 0,
      chkpt2: 0,
      answerOptions: [],
@@ -62,19 +59,7 @@ class App extends Component {
        Maybe: 0
      },
     };
-    // this.handleAnswer1Selected = this.handleAnswer1Selected.bind(this);
-    // this.handleAnswer2Selected = this.handleAnswer2Selected.bind(this);
-    // this.handleAnswer3Selected = this.handleAnswer3Selected.bind(this);
-    // this.handleAnswer4Selected = this.handleAnswer4Selected.bind(this);
-    // this.handleAnswer5Selected = this.handleAnswer5Selected.bind(this);
-    // this.handleAnswer6Selected = this.handleAnswer6Selected.bind(this);
-    // this.handleAnswer7Selected = this.handleAnswer7Selected.bind(this);
-    // this.handleAnswer8Selected = this.handleAnswer8Selected.bind(this);
-    // this.handleAnswer9Selected = this.handleAnswer9Selected.bind(this);
-    // this.handleAnswer10Selected = this.handleAnswer10Selected.bind(this);
-    // this.handleAnswer11Selected = this.handleAnswer11Selected.bind(this);
-    // this.handleAnswer12Selected = this.handleAnswer12Selected.bind(this);
-    // this.handleAnswer13Selected = this.handleAnswer13Selected.bind(this);
+    this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.evaluateNow = this.evaluateNow.bind(this);
     this._onAssessClick = this._onAssessClick.bind(this);
     this._onPrepareClick = this._onPrepareClick.bind(this);
@@ -85,7 +70,6 @@ class App extends Component {
     this.extortionQuizFunc = this.extortionQuizFunc.bind(this);
     this.fharmQuizFunc = this.fharmQuizFunc.bind(this);
     this._onCompleteClick = this._onCompleteClick.bind(this);
-    this._onInvestigateClick = this._onInvestigateClick.bind(this);
     this._onVictimClick = this._onVictimClick.bind(this);
     this.downloadPdf = this.downloadPdf.bind(this);
   }
@@ -255,249 +239,100 @@ class App extends Component {
     }
   }
 
-  // setQnum(val) {
-  //   this.setState({
-  //     qnum: val
-  //   });
-  // }
 
-  handleQ1(event) {
-    var answer = event.currentTarget.value;
-    //this.setQnum(3)
+  handleAnswerSelected(event) {
+    const answer = event.currentTarget.value;
     //this.writePdf(answer);
+    var ans = answer.split('_');
     const updatedAnswersCount = update(this.state.answersCount, {
       [answer]: {$apply: (currentValue) => currentValue + 1}
     });
 
-    // if (Qnum == 1) {
-    this.setState({
-      answersCount: updatedAnswersCount,
-      Answer1: answer,
-      chkpt1: 1
-    });
-    // }
-    // else if (Qnum == 2) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer2: answer,
-    //   });
-    // }
-    // else if (Qnum == 3) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer3: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 4) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer4: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 5) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer5: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 6) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer6: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 7) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer7: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 8) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer8: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 9) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer9: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 10) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer10: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 11) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer11: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 12) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer12: answer
-    //   });
-    // }
-    // else if (this.state.qnum == 13) {
-    //   this.setState({
-    //     answersCount: updatedAnswersCount,
-    //     Answer13: answer,
-    //   });
-    // }
-    // else {
+    if (ans[1] == 1) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer1: ans[0],
+        chkpt1: answer
+      });
+    }
+    else if (ans[1] == 2) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer2: ans[0],
+        chkpt2: answer
+      });
+    }
+    else if (ans[1] == 3) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer3: ans[0]
+      });
+    }
+    else if (ans[1] == 4) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer4: ans[0]
+      });
+    }
+    else if (ans[1] == 5) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer5: ans[0]
+      });
+    }
+    else if (ans[1] == 6) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer6: ans[0]
+      });
+    }
+    else if (ans[1] == 7) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer7: ans[0]
+      });
+    }
+    else if (ans[1] == 8) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer8: ans[0]
+      });
+    }
+    else if (ans[1] == 9) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer9: ans[0]
+      });
+    }
+    else if (ans[1] == 10) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer10: ans[0]
+      });
+    }
+    else if (ans[1] == 11) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer11: ans[0]
+      });
+    }
+    else if (ans[1] == 12) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer12: ans[0]
+      });
+    }
+    else if (ans[1] == 13) {
+      this.setState({
+        answersCount: updatedAnswersCount,
+        Answer13: ans[0],
+      });
+    }
+    else {
 
-    // }
+    }
   }
 
-  handleAnswer2Selected(event) {
-    var answer = event.currentTarget.value;
-    //this.writePdf(answer);
-    const updatedAnswersCount = update(this.state.answersCount, {
-      [answer]: {$apply: (currentValue) => currentValue + 1}
-    });
-    this.setState({
-      answersCount: updatedAnswersCount,
-      Answer2: answer,
-      chkpt2: 2
-    });
-  }
-
-  // handleAnswer3Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer3: answer
-  //   });
-  // }
-
-  // handleAnswer4Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer4: answer
-  //   });
-  // }
-
-  // handleAnswer5Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer5: answer
-  //   });
-  // }
-
-  // handleAnswer6Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer6: answer
-  //   });
-  // }
-
-  // handleAnswer7Selected(event) {
-  //   var answer = event.currentTarget.value;
-
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer7: answer
-  //   });
-  // }
-
-  // handleAnswer8Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer8: answer
-  //   });
-  // }
-
-  // handleAnswer9Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer9: answer
-  //   });
-  // }
-
-  // handleAnswer10Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer10: answer
-  //   });
-  // }
-
-  // handleAnswer11Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer11: answer
-  //   });
-  // }
-
-  // handleAnswer12Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer12: answer
-  //   });
-  // }
-
-  // handleAnswer13Selected(event) {
-  //   var answer = event.currentTarget.value;
-  //   //this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     Answer13: answer
-  //   });
-  // }
 
   evaluateNow() {
     setTimeout(() => this.setResults(this.getResults()), 300);
@@ -516,168 +351,153 @@ class App extends Component {
       <div className= "Qquestions">
       <Quiz
           answer={this.state.Answer1}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId}
           question={this.state.question[0].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswer1Selected={this.handleQ1.bind(this)}
-          onAnswer2Selected={this.handleAnswer2Selected.bind(this)}
+          onAnswerSelected={this.handleAnswerSelected}
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer2}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+1}
           question={this.state.question[1].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswer1Selected={this.handleQ1.bind(this)}
-          onAnswer2Selected={this.handleAnswer2Selected.bind(this)}
+          onAnswerSelected={this.handleAnswerSelected}
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer3}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+2}
           question={this.state.question[2].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer2Selected}
+          onAnswerSelected={this.handleAnswerSelected}
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer4}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+3}
           question={this.state.question[3].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer5}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+4}
           question={this.state.question[4].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer6}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+5}
           question={this.state.question[5].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer7}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+6}
           question={this.state.question[6].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer8}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+7}
           question={this.state.question[7].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer9}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+8}
           question={this.state.question[8].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer10}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+9}
           question={this.state.question[9].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer11}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+10}
           question={this.state.question[10].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer12}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+11}
           question={this.state.question[11].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
       <br></br><br></br><br></br><br></br><br></br><br></br>
       <Quiz
           answer={this.state.Answer13}
-          answerOptions={this.state.answerOptions}
           questionId={this.state.questionId+12}
           question={this.state.question[12].question}
           questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
             RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
             IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswer1Selected}
+          onAnswerSelected={this.handleAnswerSelected}
 
       />
       <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
@@ -1284,22 +1104,6 @@ class App extends Component {
           <button type="button" style={{'font-size':'16px'}} onClick={this._onAssessClick} class="button1">Is my case trafficking?</button>
         </div>
       </div>
-      <picture>
-        <source srcset={instructions1} media= "(max-width: 760px)"/>
-        <img src={instructions} alt="Instructions" className = "Desc-Image"/>
-      </picture>
-      <picture>
-        <source srcset={instructions2} media= "(max-width: 760px)"/>
-        <img src="" className = "Desc-Image"/>
-      </picture>
-      <picture>
-        <source srcset={instructions3} media= "(max-width: 760px)"/>
-        <img src="" className = "Desc-Image"/>
-      </picture>
-      <picture>
-        <source srcset={instructions4} media= "(max-width: 760px)"/>
-        <img src="" className = "Desc-Image"/>
-      </picture>
       </div>
     );
   }
@@ -1403,12 +1207,6 @@ class App extends Component {
   _onCompleteClick() {
     this.setState({
       page: 1,
-    });
-  }
-
-  _onInvestigateClick() {
-    this.setState({
-      page: 5,
     });
   }
 
@@ -1743,23 +1541,15 @@ class App extends Component {
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Serious harm is not defined under Massachusetts law, but federal law is persuasive authority. 
-              <input class="toggle-box" id="identifier-16" type="checkbox" />
-              <label for="identifier-16"></label>
-              <div class = 'aa'>
-              <br/>
               Under federal law, serious harm can be physical and nonphysical, and includes psychological, financial,
               economic, or reputational harm. Generally, the test contemplates whether it is sufficiently serious, under all
               the surrounding circumstances, to compel a reasonable person of the same background and in the same
-              circumstances to perform or to continue performing labor or services in order to avoid incurring that harm.</div></li>
+              circumstances to perform or to continue performing labor or services in order to avoid incurring that harm.</li>
               <br></br>
           <li><strong>Legal Definition : </strong>Serious harm is defined federally as "any harm, whether physical or nonphysical, including psychological,
-              <input class="toggle-box" id="identifier-17" type="checkbox" />
-              <label for="identifier-17"></label>
-              <div class = 'bb'>
-              <br/>
               financial, or reputational harm, that is sufficiently serious, under all the surrounding circumstances, to
               compel a reasonable person of the same background and in the same circumstances to perform or to
-              continue performing labor or services in order to avoid incurring that harm." 18 USC § 1589(c)(2).</div></li>
+              continue performing labor or services in order to avoid incurring that harm." 18 USC § 1589(c)(2).</li>
               <br></br>
           <li><strong>Examples: </strong>Subject kicks the victim to wake her up to work for her as a domestic worker.</li>
         </ul>
@@ -1783,12 +1573,8 @@ class App extends Component {
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Physical restraint means purposely limiting or obstructing the freedom of a person's bodily movement.
-              <input class="toggle-box" id="identifier-18" type="checkbox" />
-              <label for="identifier-18"></label>
-              <div class = 'cc'>
-              <br/>
               This can include using locks on doors or windows to more subtle forms of control that restrict another
-              person’s ability to move around.</div></li>
+              person’s ability to move around.</li>
               <br></br>
           <li><strong>Examples: </strong>The subject locks the victim in the restaurant in the morning and requires her to cook and clean.</li>
         </ul>
@@ -1811,24 +1597,16 @@ class App extends Component {
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Abuse of the legal process is not defined under Massachusetts law but federal law is persuasive authority.
-              <input class="toggle-box" id="identifier-19" type="checkbox" />
-              <label for="identifier-19"></label>
-              <div class = 'dd'>
-              <br/>
               Federally, abuse of the legal process includes the use or threatened use of a law or legal process, whether
               administrative, civil, or criminal, in any manner or for any purpose for which the law was not designed.
               Common examples are deportation threats, whether subtle or overt. Click here to view the federal
-              definition of abuse of the legal process.</div></li>
+              definition of abuse of the legal process.</li>
               <br></br>
               
           <li><strong>Legal Definition : </strong>Abuse of the legal process is defined federally as "the use or threatened use of a law or legal process,
-              <input class="toggle-box" id="identifier-20" type="checkbox" />
-              <label for="identifier-20"></label>
-              <div class = 'ee'>
-              <br/>
               whether administrative, civil, or criminal, in any manner or for any purpose for which the law was not
               designed, in order to exert pressure on another person to cause that person to take some action or refrain
-              from taking some action." 22 U.S.C. § 7102(1).</div></li>
+              from taking some action." 22 U.S.C. § 7102(1).</li>
               <br></br>
 
           <li><strong>Examples: </strong>The subject threatens the victim with deportation if she stops working.</li>
@@ -1852,12 +1630,8 @@ class App extends Component {
       <div class="panel">
       <ul>
           <li><strong>Lay Definition :</strong> This includes taking someone's passport for any period of time, even if it is brief. 
-              <input class="toggle-box" id="identifier-21" type="checkbox" />
-              <label for="identifier-21"></label>
-              <div class = 'ff'>
-              <br/>
               In addition, it can include
-              the tearing or mutilating of identity documents.</div></li>
+              the tearing or mutilating of identity documents.</li>
           <br></br>
           <li><strong>Examples: </strong>The subject takes the victim's passport and holds it while working for him.</li>
         </ul>
@@ -1880,18 +1654,10 @@ class App extends Component {
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong>Extortion generally is the practice of trying to get something through force, threats, or blackmail. 
-              <input class="toggle-box" id="identifier-22" type="checkbox" />
-              <label for="identifier-22"></label>
-              <div class = 'gg'>
-              <br/>
               For example, extortion might be involved if a subject threatens to release embarrassing photographs, unless
-              the victim continues to work.</div></li>
+              the victim continues to work.</li>
           <br></br>
           <li><strong>Legal Definition : </strong>Massachusetts General Laws define extortion as involving "[w]hoever, verbally or by a written or printed
-              <input class="toggle-box" id="identifier-23" type="checkbox" />
-              <label for="identifier-23"></label>
-              <div class = 'hh'>
-              <br/>
               communication, maliciously threatens to accuse another of a crime or offence, or by a verbal or written or
               printed communication maliciously threatens an injury to the person or property of another, or any police officer
               or person having the powers of a police officer, or any officer, or employee of any licensing authority who
@@ -1899,7 +1665,7 @@ class App extends Component {
               another the power or authority vested in him, with intent thereby to extort money or any pecuniary advantage, or
               with intent to compel any person to do any act against his will, shall be punished by imprisonment in the state
               prison for not more than fifteen years, or in the house of correction for not more than two and one half years, or
-              by a fine of not more than five thousand dollars, or both." Mass. Gen. Laws Ch. 265, § 25.</div></li>
+              by a fine of not more than five thousand dollars, or both." Mass. Gen. Laws Ch. 265, § 25.</li>
           <br></br>
           <li><strong>Examples: </strong>The subject threatens to send compromising photographs of the victim to the media if she refuses to work.</li>
         </ul>
@@ -1922,21 +1688,13 @@ class App extends Component {
       <div class="panel">
         <ul>
           <li><strong>Lay Definition :</strong> Financial harm is involved if the subject puts the victim in a detrimental position in relation to wealth,
-              <input class="toggle-box" id="identifier-24" type="checkbox" />
-              <label for="identifier-24"></label>
-              <div class = 'ii'>
-              <br/>
               property, or other monetary benefits through extortion, criminal usury, or illegal employment contracts.
               This might include a situation where the subject uses an illegal employment contract to lure a victim to
-              work in demeaning conditions.</div></li>
+              work in demeaning conditions.</li>
           <br></br>
           <li><strong>Legal Definition : </strong>Financial harm is defined as "a detrimental position in relation to wealth, property or other monetary benefits
-              <input class="toggle-box" id="identifier-25" type="checkbox" />
-              <label for="identifier-25"></label>
-              <div class = 'jj'>
-              <br/>
               that occurs as a result of another person's illegal act including, but not limited to, extortion under Mass. Gen.
-              Laws Ch. 265, Sec. 49 (“Criminal Usury”) or illegal employment contracts." Mass. Gen. Laws Ch. 265, § 49.</div></li>
+              Laws Ch. 265, Sec. 49 (“Criminal Usury”) or illegal employment contracts." Mass. Gen. Laws Ch. 265, § 49.</li>
           <br></br>
           <li><strong>Examples: </strong>The subject runs up a debt of $10,000 on credit cards in the victim's name and says she has to work to pay it off.</li>
         </ul>
@@ -1955,20 +1713,6 @@ class App extends Component {
       
       <button class="button" style = {{'font-size' : '20px'}} onClick = {this._onCompleteClick}>Done</button>
       </div>
-      </div>
-    );
-  }
-
-  renderInvestigate() {
-    return (
-      <div>
-        <p className="asse">Checklist</p>
-        <ol>
-          <li> Some Text........ </li>
-          <li> Some Text........ </li>
-          <li> Some Text........ </li>
-          <li> Some Text........ </li>
-        </ol>
       </div>
     );
   }
@@ -1994,7 +1738,6 @@ class App extends Component {
         <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>HOME</strong></a></li>
         <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
-        <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
       </ul>
     );
@@ -2006,7 +1749,6 @@ class App extends Component {
         <li class="lis"><a onClick= {this._onCompleteClick}><strong>HOME</strong></a></li>
         <li class="lis"><a class="active" onClick= {this._onPrepareClick}><strong>PREPARE</strong></a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
-        <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
       </ul>
     );
@@ -2018,19 +1760,6 @@ class App extends Component {
         <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
         <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a class="active" onClick= {this._onAssessClick}><strong>ASSESS</strong></a></li>
-        <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
-        <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
-      </ul>
-    );
-  }
-
-  renderNavInvestigate() {
-    return (
-      <ul id="menu" class="menu">
-        <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
-        <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
-        <li class="lis"><a class="active" onClick= {this._onInvestigateClick}><strong>INVESTIGATE</strong></a></li>
         <li class="lis"><a onClick= {this._onVictimClick}>VICTIM SERVICES</a></li>
       </ul>
     );
@@ -2042,7 +1771,6 @@ class App extends Component {
         <li class="lis"><a onClick= {this._onCompleteClick}>HOME</a></li>
         <li class="lis"><a onClick= {this._onPrepareClick}>PREPARE</a></li>
         <li class="lis"><a onClick= {this._onAssessClick}>ASSESS</a></li>
-        <li class="lis"><a onClick= {this._onInvestigateClick}>INVESTIGATE</a></li>
         <li class="lis"><a class="active" onClick= {this._onVictimClick}><strong>VICTIM SERVICES</strong></a></li>
       </ul>
     );
@@ -2073,7 +1801,7 @@ class App extends Component {
           this.renderResult() : (this.state.qcategory == 1 ? this.renderHarmQuiz() : this.state.qcategory == 2 ? 
           this.renderRestraintQuiz() : this.state.qcategory == 3 ? this.renderAbuseQuiz() : this.state.qcategory == 4 ?
           this.renderIdentityQuiz() : this.state.qcategory == 5 ? this.renderExtortionQuiz() : this.renderfHarmQuiz()))
-          : this.state.page == 5 ? this.renderInvestigate() : this.state.page == 6 ? this.renderVictim() : this.renderHome()}
+          : this.state.page == 5 ? this.renderHome() : this.state.page == 6 ? this.renderVictim() : this.renderHome()}
       </div>
     );
   }

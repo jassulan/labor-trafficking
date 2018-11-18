@@ -21,11 +21,11 @@ function Quiz(props) {
               className="radioCustomButton"
               name={"radioGroup" + props.questionId}
               checked={"Yes" === props.answer}
-              id={props.questionId}
+              id={"Yes_" + props.questionId}
               value={"Yes_" + props.questionId}
               onChange={props.onAnswerSelected}
             />
-            <label className="radioCustomLabel" htmlFor={props.questionId}>
+            <label className="radioCustomLabel" htmlFor={"Yes_" + props.questionId}>
               Yes
             </label>
           </li>
@@ -36,11 +36,11 @@ function Quiz(props) {
               className="radioCustomButton"
               name={"radioGroup" + props.questionId}
               checked={"No" === props.answer}
-              id={props.questionId}
+              id={"No_" + props.questionId}
               value={"No_" + props.questionId}
               onChange={props.onAnswerSelected}
             />
-            <label className="radioCustomLabel" htmlFor={props.questionId}>
+            <label className="radioCustomLabel" htmlFor={"No_" + props.questionId}>
               No
             </label>
           </li>
@@ -51,11 +51,11 @@ function Quiz(props) {
               className="radioCustomButton"
               name={"radioGroup" + props.questionId}
               checked={"Maybe" === props.answer}
-              id={props.questionId}
+              id={"Maybe_" + props.questionId}
               value={"Maybe_" + props.questionId}
               onChange={props.onAnswerSelected}
             />
-            <label className="radioCustomLabel" htmlFor={props.questionId}>
+            <label className="radioCustomLabel" htmlFor={"Maybe_" + props.questionId}>
               Maybe
             </label>
           </li>
