@@ -83,56 +83,6 @@ class App extends Component {
   scrollToTop() {
     this.el.scrollIntoView({ behavior: 'smooth' });
   }
-  // cwm() {
-  //   if (this.state.qcategory == 1) {
-  //     const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: SeriousHarmquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 2) {
-  //     const shuffledAnswerOptions = RestraintquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: RestraintquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 3) {
-  //     const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: AbuseofLawquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 4) {
-  //     const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: IdentityDocumentsquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 5) {
-  //     const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: ExtortionquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 6) {
-  //     const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
-
-  //     this.setState({
-  //       question: FinancialHarmquizQuestions[0].question,
-  //       answerOptions: shuffledAnswerOptions[0]
-  //     });
-  //   }
-  // }
 
   shuffleArray(array) {
     return array;
@@ -230,34 +180,34 @@ class App extends Component {
     if (this.state.qcategory == 1) {
       if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes'
         || this.state.Answer5 == 'Yes'|| this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
     else if (this.state.qcategory == 2) {
       if (this.state.Answer1 == 'Yes' || this.state.Answer4 == 'Yes' || this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes'
         || this.state.Answer8 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
     else if (this.state.qcategory == 3) {
       if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
     else if (this.state.qcategory == 4) {
       if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes'
         || this.state.Answer5 == 'Yes'|| this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
     else if (this.state.qcategory == 5) {
       if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
     else if (this.state.qcategory == 6) {
       if (this.state.Answer4 == 'Yes') {
-        return 'Yes'
+        return ['Yes']
       }
     }
 
@@ -421,6 +371,7 @@ class App extends Component {
     return (
       <div>
       <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
       <p className="asse">Category 1: Serious Harm</p>
       <p className="disc">Causes or threatens to cause serious harm to any person </p>
       </div>
@@ -1131,7 +1082,7 @@ class App extends Component {
           {close => (
           <div className="modal">
             <button style = {{'font-size' : '25px', 'background-color' : 'white', 'border' : 'none', 'cursor' : 'pointer'}} onClick={() => { console.log("modal closed ");
-                close()}}>
+                close(); this._onAssessClick}}>
                 X
                 </button>
             <center><div className="header"> <strong>Results for Category: </strong></div>
@@ -1217,6 +1168,19 @@ class App extends Component {
   _onAssessClick() {
     this.setState({
       page: 3,
+      Answer1: '',
+      Answer2: '',
+      Answer3: '',
+      Answer4: '',
+      Answer5: '',
+      Answer6: '',
+      Answer7: '',
+      Answer8: '',
+      Answer9: '',
+      Answer10: '',
+      Answer11: '',
+      Answer12: '',
+      Answer13: ''
     });
   }
 
