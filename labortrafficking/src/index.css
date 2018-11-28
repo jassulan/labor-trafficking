@@ -16,6 +16,26 @@ body {
   background: #fff;
   border-radius: 3px;
 }
+.popup {
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  margin: auto;
+  background-color: rgba(0,0,0, 0.5);
+}
+.popup_inner {
+  position: absolute;
+  left: 25%;
+  right: 25%;
+  top: 25%;
+  bottom: 25%;
+  margin: auto;
+  background: white;
+}
 
 @media (min-width: 769px) {
   .container {
@@ -30,6 +50,12 @@ body {
 
 /* Quiz Component */
 .answerOptions {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+}
+
+.answerOptions1 {
   margin: 0;
   padding: 0;
   list-style: none;
@@ -319,7 +345,6 @@ body {
     cursor: pointer;
 }
 
-
 /*Hover state for top level links*/
 .lis:hover a {
   border-bottom: 3px solid #19c589;
@@ -346,6 +371,7 @@ body {
 input[type=checkbox]{
     display: none;
 }
+
 /*Show menu when invisible checkbox is checked*/
 input[type=checkbox]:checked ~ #menu{
     display: block;
@@ -438,7 +464,9 @@ input[type=checkbox]:checked ~ #menu{
 }
 
 .buttonContainer {
-  padding-left: 15px;
+  padding-left: 5px;
+  padding-right: 5px;
+  padding-bottom: 10px;
 }
 
 
@@ -490,7 +518,7 @@ input[type=checkbox]:checked ~ #menu{
   font-family: sans-serif;
   padding-left: 30px; 
   text-align: left;
-  padding-top: 150px;
+  padding-top: 100px;
 }
 
 .HomeHead1 {
