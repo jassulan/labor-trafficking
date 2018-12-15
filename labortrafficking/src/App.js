@@ -1,14 +1,9 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
-import instructions from './instructions.jpg';
-import instructions1 from './instructions1.jpg';
-import instructions2 from './instructions2.jpg';
-import instructions3 from './instructions3.jpg';
-import instructions4 from './instructions4.jpg';
-import YesImg from './Yes.png';
-import NoImg from './No.png';
-import MaybeImg from './Maybe.png';
-import './App.css';
+import logo from './svg/logo.svg';
+import YesImg from './images/Yes.png';
+import NoImg from './images/No.png';
+import MaybeImg from './images/Maybe.png';
+import './css/App.css';
 import Question from './components/Question';
 import SeriousHarmquizQuestions from './api/SeriousHarmquizQuestions';
 import AbuseofLawquizQuestions from './api/AbuseofLawquizQuestions';
@@ -29,6 +24,7 @@ class App extends Component {
     super(props);
     this.state = {
      counter: 0,
+     scrollTrue: true,
      questionId: 1,
      qcategory: 1,
      question: [],
@@ -57,6 +53,9 @@ class App extends Component {
        Maybe: 0
      },
     };
+
+    //************************************ Bindings for all buttons ***************************************************
+
     this.handleAnswerSelected = this.handleAnswerSelected.bind(this);
     this.evaluateNow = this.evaluateNow.bind(this);
     this._onAssessClick = this._onAssessClick.bind(this);
@@ -71,7 +70,9 @@ class App extends Component {
     this._onVictimClick = this._onVictimClick.bind(this);
     this.downloadPdf = this.downloadPdf.bind(this);
   }
-  
+
+  //******************** Will be executed everytime react components are rendered or state changes *********************
+
   componentDidMount() {
     this.scrollToTop();
   }
@@ -80,13 +81,16 @@ class App extends Component {
     this.scrollToTop();
   }
 
+  //******************** Scroll to top of page whenever page updates or changes, except quiz page **********************
+
   scrollToTop() {
-    this.el.scrollIntoView({ behavior: 'smooth' });
+    if (this.state.scrollTrue) {
+      this.el.scrollIntoView({ behavior: 'smooth' });
+    }
   }
 
-  shuffleArray(array) {
-    return array;
-  };
+  //******************** Write to pdf and download functions using explicit page margins, alignments *******************
+  //******************** (Change this according to new requirements, jspdf is used) ************************************
 
   writePdf(answer) {
 
@@ -112,68 +116,30 @@ class App extends Component {
     this.state.doc.save('Assessment Results.pdf');
   }
 
-  // setUserAnswer(answer) {
-  //   this.writePdf(answer);
-  //   const updatedAnswersCount = update(this.state.answersCount, {
-  //     [answer]: {$apply: (currentValue) => currentValue + 1}
-  //   });
-  //   this.setState({
-  //     answersCount: updatedAnswersCount,
-  //     answer: answer
-  //   });
-  // }
+  //******************* Function to handle accordions for interview tips and category list pages (pages 2,3) ***********
 
-  // setNextQuestion() {
-  //   const counter = this.state.counter + 1;
-  //   const questionId = this.state.questionId + 1;
-  //   this.setState({
-  //     counter: counter,
-  //     questionId: questionId,
-  //     answer: ''
-  //   });
-  //   if (this.state.qcategory == 1) {
-  //     this.setState({
-  //       question: SeriousHarmquizQuestions[counter].question,
-  //       qlist: (counter, SeriousHarmquizQuestions[counter].question),
-  //       answerOptions: SeriousHarmquizQuestions[counter].answers
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 2) {
-  //     this.setState({
-  //       question: RestraintquizQuestions[counter].question,
-  //       qlist: (counter, RestraintquizQuestions[counter].question),
-  //       answerOptions: RestraintquizQuestions[counter].answers
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 3) {
-  //     this.setState({
-  //       question: AbuseofLawquizQuestions[counter].question,
-  //       qlist: (counter, AbuseofLawquizQuestions[counter].question),
-  //       answerOptions: AbuseofLawquizQuestions[counter].answers
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 4) {
-  //     this.setState({
-  //       question: IdentityDocumentsquizQuestions[counter].question,
-  //       qlist: (counter, IdentityDocumentsquizQuestions[counter].question),
-  //       answerOptions: IdentityDocumentsquizQuestions[counter].answers
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 5) {
-  //     this.setState({
-  //       question: ExtortionquizQuestions[counter].question,
-  //       qlist: (counter, ExtortionquizQuestions[counter].question),
-  //       answerOptions: ExtortionquizQuestions[counter].answers
-  //     });
-  //   }
-  //   else if (this.state.qcategory == 6) {
-  //     this.setState({
-  //       question: FinancialHarmquizQuestions[counter].question,
-  //       qlist: (counter, FinancialHarmquizQuestions[counter].question),
-  //       answerOptions: FinancialHarmquizQuestions[counter].answers
-  //     });
-  //   }
-  // }
+  prepareFunc() {
+    var acc = document.getElementsByClassName("accordion");
+    var i;
+
+    for (i = 0; i < acc.length; i++) {
+      acc[i].addEventListener("click", function() {
+        this.classList.toggle("active");
+        var panel = this.nextElementSibling;
+        if (panel != null){
+          if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+          }
+        } else {
+          panel.style.maxHeight = panel.scrollHeight + "px";
+        } 
+      });
+    }
+  }
+
+  //******************************************************************************************************************************************
+  //******************************************** RESULT EVALUATION FUNCTIONS *****************************************************************
+  //******************************************************************************************************************************************
 
   getResults() {
 
@@ -273,890 +239,22 @@ class App extends Component {
 
   setResults (result) {
     if (result.length === 1) {
-      // const a = this.state.line + 20;
-      // this.state.doc.text('Labor Trafficking case: ' + String(result[0]), 10, a);
-      this.setState({ result: result[0], page: 5 });
+      this.setState({ result: result[0], scrollTrue: true, page: 5 });
     } else {
-      // const a = this.state.line + 20;
-      // this.state.doc.text('Labor Trafficking case: Maybe', 10, a);
-      this.setState({ result: 'Maybe', page: 5 });
+      this.setState({ result: 'Maybe', scrollTrue: true, page: 5 });
     }
   }
 
+  //******************************************************************************************************************************************
+  //*************************************************** ON-CLICK FUNCTIONS *******************************************************************
+  //******************************************************************************************************************************************
 
-  handleAnswerSelected(event) {
-    const answer = event.currentTarget.value;
-    //this.writePdf(answer);
-    var ans = answer.split('_');
-    const updatedAnswersCount = update(this.state.answersCount, {
-      [answer]: {$apply: (currentValue) => currentValue + 1}
+  //****************************************** On-click functions for Pages ********************************************
+
+  _onCompleteClick() {
+    this.setState({
+      page: 1,
     });
-
-    if (ans[1] == 1) {
-      this.setState({
-        Answer1: ans[0],
-      });
-    }
-    else if (ans[1] == 2) {
-      this.setState({
-        Answer2: ans[0],
-      });
-    }
-    else if (ans[1] == 3) {
-      this.setState({
-        Answer3: ans[0]
-      });
-    }
-    else if (ans[1] == 4) {
-      this.setState({
-        Answer4: ans[0]
-      });
-    }
-    else if (ans[1] == 5) {
-      this.setState({
-        Answer5: ans[0]
-      });
-    }
-    else if (ans[1] == 6) {
-      this.setState({
-        Answer6: ans[0]
-      });
-    }
-    else if (ans[1] == 7) {
-      this.setState({
-        Answer7: ans[0]
-      });
-    }
-    else if (ans[1] == 8) {
-      this.setState({
-        Answer8: ans[0]
-      });
-    }
-    else if (ans[1] == 9) {
-      this.setState({
-        Answer9: ans[0]
-      });
-    }
-    else if (ans[1] == 10) {
-      this.setState({
-        Answer10: ans[0]
-      });
-    }
-    else if (ans[1] == 11) {
-      this.setState({
-        Answer11: ans[0]
-      });
-    }
-    else if (ans[1] == 12) {
-      this.setState({
-        Answer12: ans[0]
-      });
-    }
-    else if (ans[1] == 13) {
-      this.setState({
-        Answer13: ans[0],
-      });
-    }
-    else {
-
-    }
-  }
-
-
-  evaluateNow() {
-    setTimeout(() => this.setResults(this.getResults()), 300);
-  }
-
-  renderHarmQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
-      <p className="asse">Category 1: Serious Harm</p>
-      <p className="disc">Causes or threatens to cause serious harm to any person </p>
-      </div>
-      <p className="disc" style={{'font-size': '12px', 'text-align' : 'center', 'justify-text' : 'center'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer5}
-          questionId={this.state.questionId+4}
-          question={this.state.question[4].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer6}
-          questionId={this.state.questionId+5}
-          question={this.state.question[5].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer7}
-          questionId={this.state.questionId+6}
-          question={this.state.question[6].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer8}
-          questionId={this.state.questionId+7}
-          question={this.state.question[7].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer9}
-          questionId={this.state.questionId+8}
-          question={this.state.question[8].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer10}
-          questionId={this.state.questionId+9}
-          question={this.state.question[9].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer11}
-          questionId={this.state.questionId+10}
-          question={this.state.question[10].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer12}
-          questionId={this.state.questionId+11}
-          question={this.state.question[11].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer13}
-          questionId={this.state.questionId+12}
-          question={this.state.question[12].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderRestraintQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <p className="asse">Category 2: Restraint</p>
-      <p className="disc">Physically restrains or threatens to physically restrain another person</p>
-      </div>
-      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer5}
-          questionId={this.state.questionId+4}
-          question={this.state.question[4].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer6}
-          questionId={this.state.questionId+5}
-          question={this.state.question[5].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer7}
-          questionId={this.state.questionId+6}
-          question={this.state.question[6].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer8}
-          questionId={this.state.questionId+7}
-          question={this.state.question[7].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderAbuseQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <p className="asse">Category 3: Abuse of Law</p>
-      <p className="disc">Abuses or threatens to abuse the law or legal process</p>
-      </div>
-      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer5}
-          questionId={this.state.questionId+4}
-          question={this.state.question[4].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderIdentityQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <p className="asse">Category 4: Identity Documents</p>
-      <p className="disc">Knowingly destroys, conceals, removes, confiscates or
-          possesses any actual or purported passport or other
-          immigration document, or any other actual or purported
-          government identification document, of another person</p>
-      </div>
-      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer5}
-          questionId={this.state.questionId+4}
-          question={this.state.question[4].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer6}
-          questionId={this.state.questionId+5}
-          question={this.state.question[5].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer7}
-          questionId={this.state.questionId+6}
-          question={this.state.question[6].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderExtortionQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <p className="asse">Category 5: Extortion</p>
-      <p className="disc">Engages in extortion under Massachusetts law</p>
-      </div>
-      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderfHarmQuiz() {
-    return (
-      <div>
-      <div style = {{'text-align' : 'center'}}>
-      <p className="asse">Category 6: Financial Harm</p>
-      <p className="disc">Causes or threatens to cause financial harm to any person</p>
-      </div>
-      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
-          will be stored, though you can download a PDF with your results if you choose.
-          If you exit this assessment, you will have to start over.</strong></p>
-      <div className= "Qquestions">
-      <Quiz
-          answer={this.state.Answer1}
-          questionId={this.state.questionId}
-          question={this.state.question[0].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer2}
-          questionId={this.state.questionId+1}
-          question={this.state.question[1].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer3}
-          questionId={this.state.questionId+2}
-          question={this.state.question[2].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer4}
-          questionId={this.state.questionId+3}
-          question={this.state.question[3].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer5}
-          questionId={this.state.questionId+4}
-          question={this.state.question[4].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer6}
-          questionId={this.state.questionId+5}
-          question={this.state.question[5].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer7}
-          questionId={this.state.questionId+6}
-          question={this.state.question[6].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer8}
-          questionId={this.state.questionId+7}
-          question={this.state.question[7].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer9}
-          questionId={this.state.questionId+8}
-          question={this.state.question[8].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer10}
-          questionId={this.state.questionId+9}
-          question={this.state.question[9].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer11}
-          questionId={this.state.questionId+10}
-          question={this.state.question[10].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer12}
-          questionId={this.state.questionId+11}
-          question={this.state.question[11].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      <Quiz
-          answer={this.state.Answer13}
-          questionId={this.state.questionId+12}
-          question={this.state.question[12].question}
-          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
-            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
-            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
-          onAnswerSelected={this.handleAnswerSelected}
-
-      />
-      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
-      <br></br><br></br><br></br><br></br><br></br><br></br>
-      </div>
-      </div>
-    );
-  }
-
-  renderImgTick() {
-    return (
-      <img src={YesImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
-    );
-  }
-
-  renderImgCross() {
-    return (
-      <img src={NoImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
-    );
-  }
-
-  renderImgQues() {
-    return (
-      <img src={MaybeImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
-    );
-  }
-
-  renderResult() {
-    return (
-        <div>
-        <br></br><br></br><br></br>
-        <Popup
-          trigger={<button className="button" style={{'font-size':'15px', 'margin-left':'0','margin-right':'0','display':'block','float':'none'}}> See {this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
-                                  "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
-                                  this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
-                                  "EXTORTION" : "FINANCIAL HARM"} Results </button>}
-
-          modal
-          contentStyle={{ maxWidth: "600px", height: "75%", width: "90%", overflow: "auto" }}>
-          {close => (
-          <div className="modal">
-            <button style = {{'font-size' : '25px', 'background-color' : 'white', 'border' : 'none', 'cursor' : 'pointer'}} onClick={() => { console.log("modal closed ");
-                close(); this._onAssessClick}}>
-                X
-                </button>
-            <center><div className="header"> <strong>Results for Category: </strong></div>
-            <div className="header"> <strong>{this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
-                                              "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
-                                              this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
-                                              "EXTORTION" : "FINANCIAL HARM"}</strong></div></center>
-            <br/>
-
-            {this.state.result == 'Yes' ? this.renderImgTick() : this.state.result == 'No' ? this.renderImgCross() : this.renderImgQues()}
-
-            <Result quizResult={this.state.result} />
-            <br/><br/>
-            <div className="content1">
-              <p style={{'font-size': '15px'}}><strong>Communication of information by, in, to or through this website and your receipt or use of it</strong></p>
-              <ol style = {{'font-size' : '15px', 'float': 'right'}}>
-                  <i><li>is not provided in the course of and does not create or constitute an attorney-client relationship</li></i>
-                  <i><li>is not intended as a solicitation</li></i>
-                  <i><li>is not intended to convey or constitute legal advice, and</li></i>
-                  <i><li>is not a substitute for obtaining legal advice from a qualified attorney</li></i>
-              </ol>
-              <p style={{'font-size': '15px'}}><strong>You should not act upon any such information without first seeking qualified professional
-              counsel on the specific matter.</strong></p>
-              <p>To continue answering questions in the next category, click "Continue".</p>
-              <p>To finish the assessment and download your results, click "Download".</p>
-              <p>To go back and change any of your answers, click the "X" button.</p>
-              <br></br>
-            </div>
-            <div className="actions">
-              <div className="btn-group">
-                <button className="button1" style = {{'float' : 'none', 'width' : '75%','margin-left' : 'auto', 'margin-right' : 'auto', 'display' : 'block'}} onClick={this._onAssessClick}>Continue</button>
-                <p></p>
-                <button className="button1" style = {{'float' : 'none', 'width' : '75%','margin-left' : 'auto', 'margin-right' : 'auto', 'display' : 'block'}} onClick={this.downloadPdf}>Download  <i class="fa fa-download"></i></button>
-              </div>
-            </div>
-            <br/>
-          </div>
-          )}
-        </Popup>
-        </div>
-    );
-  }
-
-  renderHome() {
-    return (
-      <div className="App">
-      <p className="HomeHead">Labor Trafficking <br></br>Identification Tool</p>
-      <div class="ButBar">
-        <p className="HomeHead1">A tool to help investigators identify labor trafficking under Massachusetts law. 
-        This is a test to determine whether your case meets the definition of labor trafficking under Massachusetts law.<br></br></p>
-        <div className="buttonContainer">
-          <button type="button" class="button1" style={{'font-size':'16px'}} onClick={this._onPrepareClick}>Tips to Interview Victim</button>
-          <button type="button" style={{'font-size':'16px'}} onClick={this._onAssessClick} class="button1">Is my case trafficking?</button>
-        </div>
-      </div>
-      </div>
-    );
-  }
-
-  prepareFunc() {
-    var acc = document.getElementsByClassName("accordion");
-    var i;
-
-    for (i = 0; i < acc.length; i++) {
-      acc[i].addEventListener("click", function() {
-        this.classList.toggle("active");
-        var panel = this.nextElementSibling;
-        if (panel.style.maxHeight && panel != null){
-          panel.style.maxHeight = null;
-        } else {
-          panel.style.maxHeight = panel.scrollHeight + "px";
-        } 
-      });
-    }
   }
 
   _onPrepareClick() {
@@ -1185,18 +283,18 @@ class App extends Component {
   }
 
   sHarmQuizFunc() {
-    const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = SeriousHarmquizQuestions.map((question) => question.answers);  
     this.setState({
       page: 4,
       questionId: 1,
       question: SeriousHarmquizQuestions,
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 1
-    });
-    
+    }); 
   }
+
   restraintQuizFunc() {
-    const shuffledAnswerOptions = RestraintquizQuestions.map((question) => this.shuffleArray(question.answers));      
+    const shuffledAnswerOptions = RestraintquizQuestions.map((question) => question.answers);      
     this.setState({
       page: 4,
       questionId: 1,
@@ -1204,10 +302,10 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 2
     });
-    
   }
+
   abuseQuizFunc() {
-    const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = AbuseofLawquizQuestions.map((question) => question.answers);  
     this.setState({
       page: 4,
       questionId: 1,
@@ -1215,10 +313,10 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 3
     });
-    
   }
+
   identitydocQuizFunc() {
-    const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = IdentityDocumentsquizQuestions.map((question) => question.answers);  
     this.setState({
       page: 4,
       questionId: 1,
@@ -1226,10 +324,10 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 4
     });
-    
   }
+
   extortionQuizFunc() {
-    const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = ExtortionquizQuestions.map((question) => question.answers);  
     this.setState({
       page: 4,
       questionId: 1,
@@ -1237,23 +335,16 @@ class App extends Component {
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 5
     });
-    
   }
+
   fharmQuizFunc() {
-    const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => this.shuffleArray(question.answers));  
+    const shuffledAnswerOptions = FinancialHarmquizQuestions.map((question) => question.answers);  
     this.setState({
       page: 4,
       questionId: 1,
       question: FinancialHarmquizQuestions,
       answerOptions: shuffledAnswerOptions[0],
       qcategory: 6
-    });
-    
-  }
-
-  _onCompleteClick() {
-    this.setState({
-      page: 1,
     });
   }
 
@@ -1268,6 +359,169 @@ class App extends Component {
       page: 6,
     });
   }
+
+  //****************************************** On-click functions for quiz answers ******************************************
+
+  handleAnswerSelected(event) {
+    const answer = event.currentTarget.value;
+    var ans = answer.split('_');
+
+    if (ans[1] == 1) {
+      this.setState({
+        Answer1: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 2) {
+      this.setState({
+        Answer2: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 3) {
+      this.setState({
+        Answer3: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 4) {
+      this.setState({
+        Answer4: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 5) {
+      this.setState({
+        Answer5: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 6) {
+      this.setState({
+        Answer6: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 7) {
+      this.setState({
+        Answer7: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 8) {
+      this.setState({
+        Answer8: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 9) {
+      this.setState({
+        Answer9: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 10) {
+      this.setState({
+        Answer10: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 11) {
+      this.setState({
+        Answer11: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 12) {
+      this.setState({
+        Answer12: ans[0],
+        scrollTrue: false
+      });
+    }
+    else if (ans[1] == 13) {
+      this.setState({
+        Answer13: ans[0],
+        scrollTrue: false
+      });
+    }
+    else {
+
+    }
+  }
+
+  evaluateNow() {
+    setTimeout(() => this.setResults(this.getResults()), 300);
+  }
+
+  //******************************************************************************************************************************************
+  //*************************************************** RENDER FUNCTIONS *********************************************************************
+  //******************************************************************************************************************************************
+
+  //*************************************** Render function for Navigation bar ******************************************
+
+  renderNavHome() {
+    return (
+      <ul id="menu" class="menu">
+        <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>Home</strong></a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
+        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
+        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
+      </ul>
+    );
+  }
+
+  renderNavPrepare() {
+    return (
+      <ul id="menu" class="menu">
+        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
+        <li class="lis"><a class="active" onClick= {this._onPrepareClick}><strong>Tips for interviewing victims</strong></a></li>
+        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
+        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
+      </ul>
+    );
+  }
+
+  renderNavAsses() {
+    return (
+      <ul id="menu" class="menu">
+        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
+        <li class="lis"><a class="active" onClick= {this._onAssessClick}><strong>Is my case trafficking?</strong></a></li>
+        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
+      </ul>
+    );
+  }
+
+  renderNavVictim() {
+    return (
+      <ul id="menu" class="menu">
+        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
+        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
+        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
+        <li class="lis"><a class="active" onClick= {this._onVictimClick}><strong>Victim services</strong></a></li>
+      </ul>
+    );
+  }
+
+  //********************************* Render function for home page ********************************************************
+
+  renderHome() {
+    return (
+      <div className="App">
+      <p className="HomeHead">Labor Trafficking <br></br>Identification Tool</p>
+      <div class="ButBar">
+        <p className="HomeHead1">A tool to help investigators identify labor trafficking under Massachusetts law. 
+        This is a test to determine whether your case meets the definition of labor trafficking under Massachusetts law.<br></br></p>
+        <div className="buttonContainer">
+          <button type="button" class="button1" style={{'font-size':'16px'}} onClick={this._onPrepareClick}>Tips to Interview Victim</button>
+          <button type="button" style={{'font-size':'16px'}} onClick={this._onAssessClick} class="button1">Is my case trafficking?</button>
+        </div>
+      </div>
+      </div>
+    );
+  }
+
+  //******************************** Render function for interviewing tips *************************************************
 
   renderPrepare() {
     return (
@@ -1564,6 +818,8 @@ class App extends Component {
     );
   }
 
+  //********************************** Render function for categories page *********************************************
+
   renderAssessmentSteps() {
     return (
     <div>
@@ -1770,6 +1026,665 @@ class App extends Component {
     );
   }
 
+  //***************************** Render functions for quiz questions for various categories: ****************************************
+
+  //************** Category 1 ***************
+
+  renderHarmQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 1: Serious Harm</p>
+      <p className="disc">Causes or threatens to cause serious harm to any person </p>
+      </div>
+      <p className="disc" style={{'font-size': '12px', 'text-align' : 'center', 'justify-text' : 'center'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer5}
+          questionId={this.state.questionId+4}
+          question={this.state.question[4].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer6}
+          questionId={this.state.questionId+5}
+          question={this.state.question[5].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer7}
+          questionId={this.state.questionId+6}
+          question={this.state.question[6].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer8}
+          questionId={this.state.questionId+7}
+          question={this.state.question[7].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer9}
+          questionId={this.state.questionId+8}
+          question={this.state.question[8].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer10}
+          questionId={this.state.questionId+9}
+          question={this.state.question[9].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer11}
+          questionId={this.state.questionId+10}
+          question={this.state.question[10].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer12}
+          questionId={this.state.questionId+11}
+          question={this.state.question[11].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer13}
+          questionId={this.state.questionId+12}
+          question={this.state.question[12].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+
+  //************** Category 2 ***************
+
+  renderRestraintQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 2: Restraint</p>
+      <p className="disc">Physically restrains or threatens to physically restrain another person</p>
+      </div>
+      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer5}
+          questionId={this.state.questionId+4}
+          question={this.state.question[4].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer6}
+          questionId={this.state.questionId+5}
+          question={this.state.question[5].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer7}
+          questionId={this.state.questionId+6}
+          question={this.state.question[6].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer8}
+          questionId={this.state.questionId+7}
+          question={this.state.question[7].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+
+  //************** Category 3 ***************
+
+  renderAbuseQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 3: Abuse of Law</p>
+      <p className="disc">Abuses or threatens to abuse the law or legal process</p>
+      </div>
+      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer5}
+          questionId={this.state.questionId+4}
+          question={this.state.question[4].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+
+  //************** Category 4 ***************
+
+  renderIdentityQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 4: Identity Documents</p>
+      <p className="disc">Knowingly destroys, conceals, removes, confiscates or
+          possesses any actual or purported passport or other
+          immigration document, or any other actual or purported
+          government identification document, of another person</p>
+      </div>
+      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer5}
+          questionId={this.state.questionId+4}
+          question={this.state.question[4].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer6}
+          questionId={this.state.questionId+5}
+          question={this.state.question[5].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer7}
+          questionId={this.state.questionId+6}
+          question={this.state.question[6].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+
+  //************** Category 5 ***************
+
+  renderExtortionQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 5: Extortion</p>
+      <p className="disc">Engages in extortion under Massachusetts law</p>
+      </div>
+      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+
+  //************** Category 6 ***************
+
+  renderfHarmQuiz() {
+    return (
+      <div>
+      <div style = {{'text-align' : 'center'}}>
+      <button style = {{'background-color':'#eee', 'border': 'none', 'font-size': '20px', 'cursor':'pointer','padding':'10px'}} onClick={this._onAssessClick}>&laquo; Categories</button>
+      <p className="asse">Category 6: Financial Harm</p>
+      <p className="disc">Causes or threatens to cause financial harm to any person</p>
+      </div>
+      <p className="disc" style={{'font-size': '12px'}}><strong>None of the information you enter in this assessment
+          will be stored, though you can download a PDF with your results if you choose.
+          If you exit this assessment, you will have to start over.</strong></p>
+      <div className= "Qquestions">
+      <Quiz
+          answer={this.state.Answer1}
+          questionId={this.state.questionId}
+          question={this.state.question[0].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer2}
+          questionId={this.state.questionId+1}
+          question={this.state.question[1].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer3}
+          questionId={this.state.questionId+2}
+          question={this.state.question[2].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer4}
+          questionId={this.state.questionId+3}
+          question={this.state.question[3].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer5}
+          questionId={this.state.questionId+4}
+          question={this.state.question[4].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer6}
+          questionId={this.state.questionId+5}
+          question={this.state.question[5].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer7}
+          questionId={this.state.questionId+6}
+          question={this.state.question[6].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer8}
+          questionId={this.state.questionId+7}
+          question={this.state.question[7].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer9}
+          questionId={this.state.questionId+8}
+          question={this.state.question[8].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer10}
+          questionId={this.state.questionId+9}
+          question={this.state.question[9].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer11}
+          questionId={this.state.questionId+10}
+          question={this.state.question[10].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer12}
+          questionId={this.state.questionId+11}
+          question={this.state.question[11].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      <Quiz
+          answer={this.state.Answer13}
+          questionId={this.state.questionId+12}
+          question={this.state.question[12].question}
+          questionTotal ={this.state.qcategory == 1 ? SeriousHarmquizQuestions.length : this.state.qcategory == 2 ? 
+            RestraintquizQuestions.length : this.state.qcategory == 3 ? AbuseofLawquizQuestions.length : this.state.qcategory == 4 ? 
+            IdentityDocumentsquizQuestions.length : this.state.qcategory == 5 ? ExtortionquizQuestions.length : FinancialHarmquizQuestions.length}
+          onAnswerSelected={this.handleAnswerSelected}
+
+      />
+      <button class="button" style = {{'font-size' : '20px', 'justify-text' : 'center'}} onClick = {this.evaluateNow}>Evaluate</button>
+      <br></br><br></br><br></br><br></br><br></br><br></br>
+      </div>
+      </div>
+    );
+  }
+  
+  //*************************************** Render function for Victim services ******************************************
+  
   renderVictim() {
     return (
       <div>
@@ -1783,52 +1698,88 @@ class App extends Component {
       </div>
     );
   }
+  
+  //*************************************** Render functions for Evaluation Result ******************************************
 
-
-  renderNavHome() {
+  renderImgTick() {
     return (
-      <ul id="menu" class="menu">
-        <li class="lis"><a class="active" onClick= {this._onCompleteClick}><strong>Home</strong></a></li>
-        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
-        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
-      </ul>
+      <img src={YesImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
     );
   }
 
-  renderNavPrepare() {
+  renderImgCross() {
     return (
-      <ul id="menu" class="menu">
-        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
-        <li class="lis"><a class="active" onClick= {this._onPrepareClick}><strong>Tips for interviewing victims</strong></a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
-        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
-      </ul>
+      <img src={NoImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
     );
   }
 
-  renderNavAsses() {
+  renderImgQues() {
     return (
-      <ul id="menu" class="menu">
-        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
-        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
-        <li class="lis"><a class="active" onClick= {this._onAssessClick}><strong>Is my case trafficking?</strong></a></li>
-        <li class="lis"><a onClick= {this._onVictimClick}>Victim services</a></li>
-      </ul>
+      <img src={MaybeImg} style = {{'display': 'block', 'margin-left': 'auto', 'margin-right': 'auto', 'width' : '10%'}} alt="Result"/>
     );
   }
 
-  renderNavVictim() {
+  renderResult() {
     return (
-      <ul id="menu" class="menu">
-        <li class="lis"><a onClick= {this._onCompleteClick}>Home</a></li>
-        <li class="lis"><a onClick= {this._onPrepareClick}>Tips for interviewing victims</a></li>
-        <li class="lis"><a onClick= {this._onAssessClick}>Is my case trafficking?</a></li>
-        <li class="lis"><a class="active" onClick= {this._onVictimClick}><strong>Victim services</strong></a></li>
-      </ul>
+        <div>
+        <br></br><br></br><br></br>
+        <Popup
+          trigger={<button className="button" style={{'font-size':'15px', 'margin-left':'0','margin-right':'0','display':'block','float':'none'}}> See {this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
+                                  "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
+                                  this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
+                                  "EXTORTION" : "FINANCIAL HARM"} Results </button>}
+
+          modal
+          contentStyle={{ maxWidth: "600px", height: "75%", width: "90%", overflow: "auto" }}>
+          {close => (
+          <div className="modal">
+            <button style = {{'font-size' : '25px', 'background-color' : 'white', 'border' : 'none', 'cursor' : 'pointer'}} onClick={() => { console.log("modal closed ");
+                close(); this._onAssessClick}}>
+                X
+                </button>
+            <center><div className="header"> <strong>Results for Category: </strong></div>
+            <div className="header"> <strong>{this.state.qcategory == 1 ? "SERIOUS HARM" : this.state.qcategory == 2 ? 
+                                              "RESTRAINT" : this.state.qcategory == 3 ? "ABUSE OF LAW" :
+                                              this.state.qcategory == 4 ? "IDENTITY DOCUMENTS" : this.state.qcategory == 5 ?
+                                              "EXTORTION" : "FINANCIAL HARM"}</strong></div></center>
+            <br/>
+
+            {this.state.result == 'Yes' ? this.renderImgTick() : this.state.result == 'No' ? this.renderImgCross() : this.renderImgQues()}
+
+            <Result quizResult={this.state.result} />
+            <br/><br/>
+            <div className="content1">
+              <p style={{'font-size': '15px'}}><strong>Communication of information by, in, to or through this website and your receipt or use of it</strong></p>
+              <ol style = {{'font-size' : '15px', 'float': 'right'}}>
+                  <i><li>is not provided in the course of and does not create or constitute an attorney-client relationship</li></i>
+                  <i><li>is not intended as a solicitation</li></i>
+                  <i><li>is not intended to convey or constitute legal advice, and</li></i>
+                  <i><li>is not a substitute for obtaining legal advice from a qualified attorney</li></i>
+              </ol>
+              <p style={{'font-size': '15px'}}><strong>You should not act upon any such information without first seeking qualified professional
+              counsel on the specific matter.</strong></p>
+              <p>To continue answering questions in the next category, click "Continue".</p>
+              <p>To finish the assessment and download your results, click "Download".</p>
+              <p>To go back and change any of your answers, click the "X" button.</p>
+              <br></br>
+            </div>
+            <div className="actions">
+              <div className="btn-group">
+                <button className="button1" style = {{'float' : 'none', 'width' : '75%','margin-left' : 'auto', 'margin-right' : 'auto', 'display' : 'block'}} onClick={this._onAssessClick}>Continue</button>
+                <p></p>
+                <button className="button1" style = {{'float' : 'none', 'width' : '75%','margin-left' : 'auto', 'margin-right' : 'auto', 'display' : 'block'}} onClick={this.downloadPdf}>Download  <i class="fa fa-download"></i></button>
+              </div>
+            </div>
+            <br/>
+          </div>
+          )}
+        </Popup>
+        </div>
     );
   }
 
+  //***************************************** Render function for App ******************************************
+  
   render() {
     
     return (
@@ -1857,6 +1808,7 @@ class App extends Component {
       </div>
     );
   }
+
 }
 
 export default App;
