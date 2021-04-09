@@ -1,3 +1,4 @@
+@import url("./vendor.css");
 html,
 body {
   padding: 0;
@@ -13,4 +14,18 @@ a {
 
 * {
   box-sizing: border-box;
+}
+
+.nav-bar {
+  display: flex;
+  padding: 1.5rem 15rem;
+  justify-content: space-between;
+  border: 1px solid #eaeaea;
+}
+
+.nav-bar__item {
+  list-style-type: none;
+
+  /* display: inline-block;
+  margin: 20px 20px; */
 }
