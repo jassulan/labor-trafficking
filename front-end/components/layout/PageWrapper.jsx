@@ -6,7 +6,9 @@ export default function PageWrapper({ children }) {
   return (
     <>
       <Metatags />
-      <Layout>{children}</Layout>
+      <Layout>
+        <main className="main">{children}</main>
+      </Layout>
     </>
   );
 }

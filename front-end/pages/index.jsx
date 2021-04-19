@@ -1,49 +1,54 @@
 import Head from "next/head";
+
 import styles from "../styles/Home.module.css";
+import Metatags from "../components/layout/Metatags";
 
 export default function Home() {
   return (
-    <div className={styles.container}>
-      <Head>
-        <title>AGO- Labor trafficking</title>
-        <link rel="icon" href="/favicon.ico" />
-      </Head>
-
-      <main className={styles.main}>
-        <h1 className={styles.title}>
-          <a href="https://nextjs.org">AGO - Labor trafficking</a>
-        </h1>
-
-        <div className={styles.grid}>
-          <a href="https://nextjs.org/docs" className={styles.card}>
-            <h3>Documentation &rarr;</h3>
-            <p>Find in-depth information about Next.js features and API.</p>
-          </a>
-
-          <a href="https://nextjs.org/learn" className={styles.card}>
-            <h3>Learn &rarr;</h3>
-            <p>Learn about Next.js in an interactive course with quizzes!</p>
-          </a>
-
-          <a
-            href="https://github.com/vercel/next.js/tree/master/examples"
-            className={styles.card}
-          >
-            <h3>Examples &rarr;</h3>
-            <p>Discover and deploy boilerplate example Next.js projects.</p>
-          </a>
-
-          <a
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=default-template&utm_campaign=create-next-app"
-            className={styles.card}
-          >
-            <h3>Deploy &rarr;</h3>
+    <>
+      <Metatags title="Home" url="https://traffickingresults.com" />
+      <div className="container">
+        <section>
+          <div className={styles.title__container}>
+            <img
+              src="/images/logo-black.svg"
+              alt="Vercel Logo"
+              className={styles.title}
+            />
+            <h5>Recognize and Evaluate Signs to Uncover Labor Trafficking</h5>
             <p>
-              Instantly deploy your Next.js site to a public URL with Vercel.
+              A tool to help investigators identify potential
+              <br />
+              labor trafficking under Massachusetts law.
             </p>
-          </a>
-        </div>
-      </main>
-    </div>
+          </div>
+          {/* <div className={styles.container}> */}
+          <div className={styles.card__container}>
+            <div className={styles.card}>
+              <h3 className={styles.h3}>Prepare</h3>
+              <div className={styles.underline}></div>
+              <p>Find tips for interviewing victims</p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.h3}>Assess</h3>
+              <div className={styles.underline}></div>
+              <p>Determine if your case is labor trafficking</p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.h3}>Resources</h3>
+              <div className={styles.underline}></div>
+              <p>
+                Learn how to refer to law enforcement or find victim services
+              </p>
+            </div>
+            <div className={styles.card}>
+              <h3 className={styles.h3}>Massachusetts Law</h3>
+              <div className={styles.underline}></div>
+              <p>View the Massachusetts labor trafficking statute</p>
+            </div>
+          </div>
+        </section>
+      </div>
+    </>
   );
 }

@@ -5,16 +5,20 @@ const Metatags = ({
   title = "Home",
   url = "http://www.traffickingresult.com/",
   image = "http://www.traffickingresult.com/logo.jpg",
-  description = "Labor Trafficking Identification Tool",
+  description = "Recognize and Evaluate Signs to Uncover Labor Trafficking",
 }) => (
   <Head>
     <meta charSet="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <meta httpEquiv="X-UA-Compatible" content="ie=edge" />
     <meta httpEquiv="content-language" content="en" />
-    <title key="title">{`${title} | abor Trafficking Identification Tool`}</title>
-    <meta name="description" content={description} key="description" />
-    <meta name="keywords" content="abor Trafficking Identification Tool" />
+    <title key="title">{`${title} | Labor Trafficking Identification Tool`}</title>
+    <meta
+      name="description"
+      content={description}
+      key="Labor trafficking under Massachusetts law. RESULT. Recognize and Evaluate Signs to Uncover Labor Trafficking. A tool to help investigators identify potential labor .."
+    />
+    <meta name="keywords" content="labor Trafficking Identification Tool" />
     <meta name="robots" content="index, follow" />
     <meta name="referrer" content="no-referrer-when-downgrade" />
 
