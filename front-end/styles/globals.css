@@ -1,4 +1,11 @@
 @import url("./vendor.css");
+
+:root {
+  --primary: #14558f;
+  --accent: #f5c436;
+  /* --background-grey: #f2f2f2; */
+}
+
 html,
 body {
   padding: 0;
@@ -18,11 +25,67 @@ a {
 
 .nav-bar {
   display: flex;
-  padding: 1.5rem 15rem;
+  padding: 0.6em 12em;
+  background-color: var(--primary);
+}
+
+.nav-bar .logo {
+  object-fit: contain;
+  width: 80px;
+  height: 100%;
+}
+
+.logo__container {
+  flex: 2.5;
+}
+
+.links__container {
+  display: flex;
+  flex: 3;
   justify-content: space-between;
-  border: 1px solid #eaeaea;
 }
 
 .nav-bar__item {
   list-style-type: none;
+  color: #fff;
 }
+
+.nav-bar__item :hover{
+}
+
+
+main.main {
+  margin: 0 auto;
+  margin-top: 4em;
+  display: grid;
+  grid-template-columns: repeat(10, 1fr);
+  /* grid-template-rows: 10vw 30vw 10vw; */
+  grid-gap: 5px;
+  max-width: calc(100% - 5em);
+}
+
+.main > .container {
+  grid-column: 2 / span 8;
+}
+
+.footer {
+  background-color: var(--primary);
+  border-top: 1px solid #eaeaea;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  padding: 1.4rem 0;
+}
+
+.footer img {
+  margin-left: 0.5rem;
+}
+
+/* .footer a {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+} */
