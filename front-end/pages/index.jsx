@@ -1,12 +1,8 @@
-import Head from "next/head";
-
 import styles from "../styles/Home.module.css";
-import Metatags from "../components/layout/Metatags";
 
 export default function Home() {
   return (
     <>
-      <Metatags title="Home" url="https://traffickingresults.com" />
       <div className="container">
         <section>
           <div className={styles.title__container}>
