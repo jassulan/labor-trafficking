@@ -1,0 +1,93 @@
+.container {
+  grid-column: 2 / span 8;
+}
+
+.section {
+  min-height: 90vh;
+}
+
+.section:first-child {
+  display: flex;
+  flex-direction: column;
+}
+
+.icons__container {
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+}
+
+
+.title {
+  text-align: center;
+  font-size: 2rem;
+  font-weight: 500;
+  margin-top: 8rem;
+  margin-bottom: 6rem;
+}
+
+.card {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  margin: 0 0.6em;
+  /* padding: 1em 1.5em 1em 1.5em; */
+  align-items: center;
+  justify-content: center;
+}
+
+.cta__button {
+  background-color: #fff;
+  padding: 0.75em 2.5em;
+  font-weight: 500;
+  margin: 0 auto;
+  border: 2px solid var(--primary);
+}
+
+.icon {
+  display: block;
+  /* margin: 0 auto 1.5em auto; */
+  margin-bottom: 1.5em;
+  height: 12rem;
+}
+
+.bottom__container {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-end;
+}
+
+.banner {
+  background-color: var(--primary);
+  display: flex;
+  justify-content: space-between;
+  color: #fff;
+  border-radius: 5px;
+  padding: 1em 4em;
+}
+
+.banner span{
+  display: flex;
+  align-items: center;
+}
+
+.caret {
+  margin-top: 1.5em;
+  width: 3rem;
+}
+
+
+.banner span:first-child{
+  margin-right: 2.5em;
+}
+
+.banner img{
+  display: inline;
+  margin-right: 0.5em;
+}
+.main__icon {
+  display: block;
+  margin: 0 auto 1.5em auto;
+}

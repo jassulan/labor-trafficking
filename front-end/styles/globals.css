@@ -51,7 +51,7 @@ a {
   padding: 1.6em 0;
   position: relative;
   list-style-type: none;
-  color: #fff;
+  color: #baccdd;
 }
 
 .nav-bar__item hr {
@@ -59,7 +59,7 @@ a {
   position: absolute;
   bottom: 0;
   height: 0.25em;
-  background-color:#baccdd;
+  background-color:#fff;
   width: 100%;
   visibility: hidden;
 }
@@ -69,15 +69,15 @@ a {
 }
 
 .nav-bar__item:hover a, .nav-bar__item a.active{
-  color: #baccdd;
+  color: #fff;
 }
 
 
 main.main {
   margin: 0 auto;
-  margin-top: 4em;
   display: grid;
   grid-template-columns: repeat(10, 1fr);
+  /* grid-template-columns: repeat(auto-fill, minmax(250px, 1fr)); */
   /* grid-template-rows: 10vw 30vw 10vw; */
   grid-gap: 5px;
   max-width: calc(100% - 5em);
