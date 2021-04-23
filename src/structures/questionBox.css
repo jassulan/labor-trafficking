@@ -1,0 +1,95 @@
+.questionBoxWrapper{
+  padding: 10px 30px;
+}
+.questionBoxContainer{
+  width: 100%;
+  border: 1px solid #14558f;
+  padding: 0;
+  -webkit-transition: opacity 1s linear 1s, max-height 1s;
+  -o-transition: opacity 1s linear 1s, max-height 1s;
+  -ms-transition: opacity 1s linear 1s, max-height 1s;
+  transition: opacity 1s linear 1s, max-height 1s;
+  opacity: 0;
+  max-width: 800px;
+}
+.questionBoxBorder{
+  width: 100%;
+  border: 5px solid #C6D5E3;
+}
+.questionBoxTitle{
+  background-color: #14558f;
+  text-align: left;
+  padding: 15px 15px;
+  position: relative;
+}
+.questionBoxTitleBefore h1{
+  margin: 0;
+  color: #fff;
+  font-size: 13px;
+  line-height: 16px;
+  font-weight: bold;
+  width: calc(100% - 24px);
+}
+
+.questionBoxTitleAfter{
+  position: absolute;
+  top: calc(50% - 6px);
+  right: 16px;
+}
+
+.questionBoxTitleAfter h1{
+  color: #fff;
+  font-weight: normal;
+  float: right;
+  font-size: 30px;
+  line-height: 16px;
+  margin: 0px;
+  padding: 0px;
+  border: 0px;
+}
+.questionBoxContent{
+  height: auto;
+  overflow: hidden;
+  -webkit-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  transition: max-height 1s;
+}
+
+
+
+/*
+-------------------------------------
+      BOOTSTRAP XS
+-------------------------------------
+*/
+@media (max-width: 767px){
+
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP SM
+-------------------------------------
+*/
+@media (min-width: 768px) and (max-width: 991px){
+
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP MD
+-------------------------------------
+*/
+@media (min-width: 992px) and (max-width: 1199px){
+
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP LG
+-------------------------------------
+*/
+@media (min-width: 1200px){
+
+}

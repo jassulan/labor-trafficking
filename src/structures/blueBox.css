@@ -1,0 +1,132 @@
+.blueBoxContainer{
+  width: 100%;
+  text-align: left;
+  max-width: 800px;
+}
+.blueBox{
+  width: 100%;
+  border-top: 10px solid #14558f;
+  background-color: #C6D5E3;
+}
+.blueBoxContainer{
+  padding: 10px 30px;
+}
+.blueBox{
+  padding: 20px 10px;
+  padding-bottom: 10px
+}
+.blueBox h1{
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  margin: 0px;
+  margin-bottom: 10px
+
+}
+.blueBox h2{
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.blueBox p{
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+.blueBox ul{
+  list-style-type: disc;
+  padding-left: 16px;
+  margin: 0px;
+  font-size: 13px;
+}
+
+
+/*
+-------------------------------------
+      BOOTSTRAP XS
+-------------------------------------
+*/
+@media (max-width: 767px){
+
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP SM
+-------------------------------------
+*/
+@media (min-width: 768px) and (max-width: 991px){
+  .blueBoxContainer{
+    padding: 10px 30px;
+  }
+  .blueBox{
+    padding: 20px 10px;
+    padding-bottom: 10px
+  }
+  .blueBox h1{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    margin: 0px;
+    margin-bottom: 10px
+
+  }
+  .blueBox h2{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .blueBox p{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP MD
+-------------------------------------
+*/
+@media (min-width: 992px) and (max-width: 1199px){
+    .blueBox{
+      padding: 30px 50px;
+      padding-bottom: 10px
+    }
+    .blueBoxContainer{
+      margin-left: auto;
+      margin-right: auto;
+      text-align: center;
+    }
+
+    .blueBoxLeft{
+      text-align: left;
+    }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP LG
+-------------------------------------
+*/
+@media (min-width: 1200px){
+  .blueBox{
+    padding: 30px 50px;
+    padding-bottom: 10px
+  }
+  .blueBoxContainer{
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+  .blueBoxLeft{
+    text-align: left;
+  }
+}

@@ -1,0 +1,140 @@
+.yellowBoxContainer{
+  padding: 10px 30px;
+  width: 100%;
+  max-width: 800px;
+}
+.yellowBox{
+  padding: 20px 10px;
+  padding-bottom: 10px;
+  width: 100%;
+  border: 2px solid #F5C436;
+}
+.yellowBox h1{
+  font-weight: 1000;
+  font-size: 14px;
+  line-height: 19px;
+  margin: 0px;
+  margin-bottom: 10px
+
+}
+.yellowBox h2{
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.yellowBox p{
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+
+/*
+-------------------------------------
+      BOOTSTRAP XS
+-------------------------------------
+*/
+@media (max-width: 767px){
+  .yellowBoxContainer{
+    padding: 10px 30px;
+    width: 100%
+  }
+  .yellowBox{
+    padding: 20px 10px;
+    padding-bottom: 10px;
+    width: 100%;
+    border: 2px solid #F5C436;
+  }
+  .yellowBox h1{
+    font-weight: 1000;
+    font-size: 14px;
+    line-height: 19px;
+    margin: 0px;
+    margin-bottom: 10px
+
+  }
+  .yellowBox h2{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .yellowBox p{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP SM
+-------------------------------------
+*/
+@media (min-width: 768px) and (max-width: 991px){
+  .yellowBoxContainer{
+    padding: 10px 30px;
+  }
+  .yellowBox{
+    padding: 20px 10px;
+    padding-bottom: 10px
+  }
+  .yellowBox h1{
+    font-weight: 1000;
+    font-size: 14px;
+    line-height: 19px;
+    margin: 0px;
+    margin-bottom: 10px
+
+  }
+  .yellowBox h2{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .yellowBox p{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP MD
+-------------------------------------
+*/
+@media (min-width: 992px) and (max-width: 1199px){
+  .yellowBoxContainer{
+    padding: 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .yellowBox{
+    padding: 20px 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP LG
+-------------------------------------
+*/
+@media (min-width: 1200px){
+  .yellowBoxContainer{
+    padding: 10px 30px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+  .yellowBox{
+    padding: 20px 10px;
+  }
+}

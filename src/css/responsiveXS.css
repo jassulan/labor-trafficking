@@ -1,0 +1,171 @@
+@media (max-width: 767px){
+  .topRowContainer{
+    padding: 0px 10px;
+    height: 60px;
+  }
+  .topDivHL{
+    height: 60px;
+    width: 80px;
+    margin-left: 10px;
+
+  }
+  .topRow1{
+    padding: 0;
+  }
+  .HomeHead{
+    width: 100%;
+    padding-top: 50px;
+    font-size: 26px;
+    line-height: 32px;
+  }
+  .pageTitle{
+    padding-top: 50px;
+    margin: 0;
+    font-size: 16px;
+    color: #14558f;
+    font-weight: bold;
+    text-align: left;
+  }
+
+  .button1{
+    margin: 0;
+    font-size: 17px;
+    height: 42px;
+    width: 148px;
+  }
+
+  .button3{
+    margin: 0;
+    font-size: 17px;
+    height: 42px;
+    width: 152px;
+  }
+
+  .assessButton{
+    width: 100px;
+  }
+
+  .Head{
+    width: 100%;
+    padding-top: 10px;
+    font-size: 24px;
+    line-height: 30px;
+    margin-bottom: 8px;
+  }
+
+  .resourcesDiv{
+    width: 100%;
+    background-color: #fff;
+  }
+
+  .resourcesDiv .resourcesMenu{
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -webkit-justify-content: center;
+    -moz-justify-content: center;
+    border-bottom: 2px solid #EAEAEA;
+  }
+
+  .resources-lis{
+    font-size: 18px;
+    margin: 0px calc((100vw - 285px)/10);
+    color: #333;
+    padding: 10px 4px;
+    margin-bottom: -2px;
+    width: auto;
+  }
+
+  .resources-lis-active{
+    color: #3B8458;
+    border-bottom: 2px solid #3B8458;
+  }
+
+  .ButBar{
+    height: 50px;
+  }
+  .HomeHead1{
+    font-size: 14px;
+    max-width: 420px;
+    line-height: 18px;
+    padding: 0px;
+  }
+  .show-menu{
+    height: 60px;
+    width: 60px;
+    float: right;
+    background-color: #14558f;
+    padding: 18px;
+    padding-right: 0px;
+  }
+  .topDivH{
+    font-size: 16px;
+    line-height: 63px;
+    padding-left: 40px;
+  }
+  .mobile-menu{
+    position: absolute;
+    height: 100vh;
+    width: 70vw;
+    top: 0;
+    right: 0;
+    display: block;
+    background-color: #11416D;
+    padding-top: 100px;
+    transition: right 0.6s;
+    -webkit-transition: right 0.6s;
+    -moz-transition: right 0.6s;
+    -o-transition: right 0.6s;
+    z-index: -1;
+  }
+  .mobile-cover{
+    top: 0;
+    height: 100vh;
+    position: absolute;
+    width: 71vw;
+    background-color: rgb(242, 242, 242);
+    transition: right 0.6s;
+    -webkit-transition: right 0.6s;
+    -moz-transition: right 0.6s;
+    -o-transition: right 0.6s;
+    z-index: 1;
+  }
+  .menu{
+    display: none;
+  }
+  .Assess{
+    position: absolute;
+    top: 0;
+    width: 100vw;
+    left: 0;
+    transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -moz-transition: 0.6s;
+    -webkit-transition: 0.6s;
+    -o-transition: 0.6s;
+  }
+  .new-lis{
+    height: auto;
+    text-align: left;
+  }
+  .new-lis a{
+    text-align: left;
+    font-size: 20px;
+    font-weight: bold;
+    padding: 0px 50px;
+    height: 50px;
+    line-height: 50px;
+  }
+  .new-lis a.active{
+    border: 0;
+    background-color: #5380AA;
+    color: #AEAEAE;
+  }
+
+  .resourcesContent{
+    width: 100%;
+    background-color: #fff;
+    padding: 20px 0px;
+  }
+
+}

@@ -1,0 +1,246 @@
+.Assess {
+  padding: 0;
+  background-color: rgb(242, 242, 242);
+}
+
+.AssessmentButton{
+  border: 0;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: none;
+  text-align: left;
+  width: 100%;
+}
+
+.AssesmentContent{
+  background-color: #fff;
+  padding-top: 20px;
+}
+
+.regularText{
+  text-align: left;
+  font-size: 13px;
+  margin-bottom: 6px;
+}
+
+.AssessmentDisclaimer{
+  position: absolute;
+  z-index: 1;
+  background: #fff;
+  margin: 15px;
+  border: 2px solid #EAEAEA;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  padding: 15px;
+}
+
+.AssessmentDisclaimer p{
+  font-size: 12px;
+  font-weight: bold;
+  line-height: 18px;
+  margin-bottom: 10px;
+  padding: 0px;
+}
+
+.AssessmentDisclaimer ul{
+  padding-left: 15px;
+}
+
+.AssessmentDisclaimer ul li p{
+  font-size: 12px;
+  font-weight: normal;
+  line-height: 18px;
+  margin-bottom: 6px;
+  padding: 0px;
+}
+
+.WarningDiv{
+  margin-bottom: 20px;
+}
+
+.WarningDiv p{
+  display: inline-block;
+  font-size: 15px;
+  line-height: 24px;
+  vertical-align: middle;
+  margin: 0px;
+}
+
+.WarningDiv img{
+  height: 24px;
+  display: inline-block;
+  line-height: 22px;
+  margin-right: 12px;
+}
+
+.DisclaimerButton{
+  text-align: center;
+}
+
+.DisclaimerButton .button3{
+  float: none;
+  margin: 0px;
+  font-size: 16px;
+  height: 38px;
+  width: 220px;
+  border-radius: 3px;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+}
+
+.expandContainer{
+  text-align: center;
+  padding-top: 15px;
+}
+
+.expandContainer p{
+  margin-bottom: 0px;
+  font-weight: bold;
+  padding-bottom: 4px;
+  color: #11416D;
+}
+
+.expandContainer .expandContainerInvert p{
+  padding-top: 4px;
+}
+
+.expandDown{
+  background-color: #fff;
+  border-top: 1px solid #EAEAEA;
+  padding-bottom: 0px;
+}
+
+.downArrow{
+  margin: 0;
+  font-size: 22px;
+  line-height: 12px;
+  font-weight: normal;
+  font-family: monospace;
+  font-weight: bold;
+  color: #11416D;
+}
+
+.AssessmentQuestions{
+  margin-top: 0px;
+  background: #fff;
+  padding: 20px 0px;
+}
+
+
+.expandable{
+  position: relative;
+  overflow: hidden;
+  -webkit-transition: max-height 1s;
+  -o-transition: max-height 1s;
+  -ms-transition: max-height 1s;
+  transition: max-height 1s;
+}
+
+.expandable:after {
+  content  : "";
+  position : absolute;
+  z-index  : 1;
+  bottom   : 0;
+  left     : 0;
+  pointer-events   : none;
+  background-image: linear-gradient(to bottom,
+                                    rgba(242,242,242, 0),
+                                    rgba(242,242,242, 1));
+  width    : 100%;
+  height   : 50%;
+}
+
+.alertText{
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+
+@media (min-width: 992px) and (max-width: 1199px){
+    .AssessmentDisclaimer{
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 1;
+      background: #fff;
+      /* margin: 15px; */
+      border: 2px solid #eaeaea;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      padding: 15px;
+      max-width: 600px;
+    }
+
+    .AssesmentContent{
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .AssessmentQuestions{
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .AssessmentButtons{
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+    }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP LG
+-------------------------------------
+*/
+@media (min-width: 1200px){
+    .AssessmentDisclaimer{
+      position: absolute;
+      left: 0;
+      right: 0;
+      margin: 100px;
+      margin-left: auto;
+      margin-right: auto;
+      z-index: 1;
+      background: #fff;
+      /* margin: 15px; */
+      border: 2px solid #eaeaea;
+      border-radius: 3px;
+      -webkit-border-radius: 3px;
+      -moz-border-radius: 3px;
+      padding: 15px;
+      max-width: 600px;
+    }
+
+    .AssesmentContent{
+      max-width: 800px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .AssessmentQuestions{
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .AssessmentButtons{
+      max-width: 550px;
+      margin-left: auto;
+      margin-right: auto;
+      padding: 0;
+    }
+
+}

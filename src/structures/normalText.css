@@ -1,0 +1,132 @@
+.normalTextContainer{
+  padding: 10px 30px;
+  padding-bottom: 0px;
+  width: 100%;
+  max-width: 800px;
+}
+.normalText{
+  padding: 0;
+  width: 100%;
+}
+.normalText h1{
+  font-weight: bold;
+  font-size: 14px;
+  line-height: 19px;
+  margin: 0px;
+  margin-bottom: 10px
+
+}
+.normalText h2{
+  font-weight: bold;
+  font-size: 13px;
+  line-height: 17px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+.normalText p{
+  font-size: 12px;
+  line-height: 16px;
+  margin: 0px;
+  margin-bottom: 10px;
+}
+
+
+/*
+-------------------------------------
+      BOOTSTRAP XS
+-------------------------------------
+*/
+@media (max-width: 767px){
+  .normalTextContainer{
+    padding: 10px 30px;
+    padding-bottom: 0px
+  }
+  .normalText{
+    padding: 0;
+  }
+  .normalText h1{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    margin: 0px;
+    margin-bottom: 10px
+
+  }
+  .normalText h2{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .normalText p{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP SM
+-------------------------------------
+*/
+@media (min-width: 768px) and (max-width: 991px){
+  .normalTextContainer{
+    padding: 10px 30px;
+    padding-bottom: 0px
+  }
+  .normalText{
+    padding: 0;
+  }
+  .normalText h1{
+    font-weight: bold;
+    font-size: 14px;
+    line-height: 19px;
+    margin: 0px;
+    margin-bottom: 10px
+
+  }
+  .normalText h2{
+    font-weight: bold;
+    font-size: 13px;
+    line-height: 17px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+  .normalText p{
+    font-size: 12px;
+    line-height: 16px;
+    margin: 0px;
+    margin-bottom: 10px;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP MD
+-------------------------------------
+*/
+@media (min-width: 992px) and (max-width: 1199px){
+  .normalTextContainer{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}
+
+/*
+-------------------------------------
+      BOOTSTRAP LG
+-------------------------------------
+*/
+@media (min-width: 1200px){
+  .normalTextContainer{
+    max-width: 800px;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+  }
+}

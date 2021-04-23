@@ -1,0 +1,47 @@
+{
+  "name": "labortrafficking",
+  "version": "0.1.0",
+  "private": true,
+  "engines": {
+    "node": ">=14.x.x",
+    "npm": ">=6.x.x"
+  },
+  "dependencies": {
+    "bootstrap": "^3.3.7",
+    "dns": "^0.2.2",
+    "express": "^4.16.4",
+    "express-favicon": "^2.0.1",
+    "jspdf": "^1.4.1",
+    "prop-types": "^15.6.2",
+    "react": "16.0.0-alpha.12",
+    "react-addons-css-transition-group": "^15.6.2",
+    "react-addons-update": "^15.6.2",
+    "react-bootstrap": "^0.32.4",
+    "react-bootstrap-validation": "^0.1.11",
+    "react-dom": "^16.4.1",
+    "react-responsive-navbar": "^1.0.11",
+    "react-router": "^4.3.1",
+    "react-router-dom": "^5.0.0",
+    "react-scripts": "^3.0.1",
+    "reactjs-popup": "^1.1.1"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "prestart": "react-scripts build",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  }
+}

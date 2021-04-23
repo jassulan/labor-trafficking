@@ -1,0 +1,320 @@
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>HARM: <i><p style={{'font-size':'16px'}}>causes or threatens to cause
+  serious harm to any person</p></i></button>
+
+  <div class="panel">
+    <ul>
+      <li><strong>Lay Definition :</strong> Serious harm is not defined under Massachusetts law, but federal law is persuasive authority.
+          Under federal law, serious harm can be physical and nonphysical, and includes psychological, financial,
+          economic, or reputational harm. Generally, the test contemplates whether it is sufficiently serious, under all
+          the surrounding circumstances, to compel a reasonable person of the same background and in the same
+          circumstances to perform or to continue performing labor or services in order to avoid incurring that harm.</li>
+          <br></br>
+      <li><strong>Legal Definition : </strong>Serious harm is defined federally as "any harm, whether physical or nonphysical, including psychological,
+          financial, or reputational harm, that is sufficiently serious, under all the surrounding circumstances, to
+          compel a reasonable person of the same background and in the same circumstances to perform or to
+          continue performing labor or services in order to avoid incurring that harm." 18 USC § 1589(c)(2).</li>
+          <br></br>
+      <li><strong>Examples: </strong>Subject kicks the victim to wake her up to work for her as a domestic worker.</li>
+    </ul>
+    <hr></hr>
+    <a href="#">Link to Massachusetts Statute→</a>
+    <br/>
+  </div>
+</div>
+
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.sHarmQuizFunc}>Start “Harm” Questions →</button>
+</div>
+
+  <br/><br/>
+
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>RESTRAINT: <br></br><i><p style={{'font-size':'16px'}}>physically restrains or threatens to physically restrain another person</p></i></button>
+
+  <div class="panel">
+    <ul>
+      <li><strong>Lay Definition :</strong> Physical restraint means purposely limiting or obstructing the freedom of a person's bodily movement.
+          This can include using locks on doors or windows to more subtle forms of control that restrict another
+          person’s ability to move around.</li>
+          <br></br>
+      <li><strong>Examples: </strong>The subject locks the victim in the restaurant in the morning and requires her to cook and clean.</li>
+    </ul>
+    <hr></hr>
+    <a href="#">Link to Massachusetts Statute→</a>
+    <br/>
+  </div>
+</div>
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.restraintQuizFunc}>Start “Restraint” Questions →</button>
+</div>
+
+<br/><br/>
+
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>ABUSE OF LAW: <br></br><i><p style={{'font-size':'16px'}}>abuses or threatens to abuse the law or legal process</p></i></button>
+
+  <div class="panel">
+    <ul>
+      <li><strong>Lay Definition :</strong> Abuse of the legal process is not defined under Massachusetts law but federal law is persuasive authority.
+          Federally, abuse of the legal process includes the use or threatened use of a law or legal process, whether
+          administrative, civil, or criminal, in any manner or for any purpose for which the law was not designed.
+          Common examples are deportation threats, whether subtle or overt. Click here to view the federal
+          definition of abuse of the legal process.</li>
+          <br></br>
+
+      <li><strong>Legal Definition : </strong>Abuse of the legal process is defined federally as "the use or threatened use of a law or legal process,
+          whether administrative, civil, or criminal, in any manner or for any purpose for which the law was not
+          designed, in order to exert pressure on another person to cause that person to take some action or refrain
+          from taking some action." 22 U.S.C. § 7102(1).</li>
+          <br></br>
+
+      <li><strong>Examples: </strong>The subject threatens the victim with deportation if she stops working.</li>
+    </ul>
+    <hr></hr>
+    <a href="#">Link to Massachusetts Statute→</a>
+    <br/>
+  </div>
+</div>
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.abuseQuizFunc}>Start “Abuse of Law” Questions →</button>
+</div>
+
+<br/><br/>
+
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>IDENTITY DOCUMENTS: <br></br><i><p style={{'font-size':'16px'}}>knowingly destroys, conceals, removes, confiscates or possesses any actual or purported passport or other immigration document, or any other actual or purported government identification document, of another person</p></i></button>
+
+  <div class="panel">
+    <ul>
+        <li><strong>Lay Definition :</strong> This includes taking someone's passport for any period of time, even if it is brief.
+            In addition, it can include
+            the tearing or mutilating of identity documents.</li>
+        <br></br>
+        <li><strong>Examples: </strong>The subject takes the victim's passport and holds it while working for him.</li>
+      </ul>
+      <hr></hr>
+      <a href="#">Link to Massachusetts Statute→</a>
+      <br/>
+  </div>
+</div>
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.identitydocQuizFunc}>Start “Identity Documents” Questions →</button>
+</div>
+
+<br/><br/>
+
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>EXTORTION: <br></br><i><p style={{'font-size':'16px'}}>engages in extortion under Massachusetts law</p></i></button>
+
+  <div class="panel">
+    <ul>
+      <li><strong>Lay Definition :</strong>Extortion generally is the practice of trying to get something through force, threats, or blackmail.
+          For example, extortion might be involved if a subject threatens to release embarrassing photographs, unless
+          the victim continues to work.</li>
+      <br></br>
+      <li><strong>Legal Definition : </strong>Massachusetts General Laws define extortion as involving "[w]hoever, verbally or by a written or printed
+          communication, maliciously threatens to accuse another of a crime or offence, or by a verbal or written or
+          printed communication maliciously threatens an injury to the person or property of another, or any police officer
+          or person having the powers of a police officer, or any officer, or employee of any licensing authority who
+          verbally or by written or printed communication maliciously and unlawfully uses or threatens to use against
+          another the power or authority vested in him, with intent thereby to extort money or any pecuniary advantage, or
+          with intent to compel any person to do any act against his will, shall be punished by imprisonment in the state
+          prison for not more than fifteen years, or in the house of correction for not more than two and one half years, or
+          by a fine of not more than five thousand dollars, or both." Mass. Gen. Laws Ch. 265, § 25.</li>
+      <br></br>
+      <li><strong>Examples: </strong>The subject threatens to send compromising photographs of the victim to the media if she refuses to work.</li>
+    </ul>
+    <hr></hr>
+    <a href="#">Link to Massachusetts Statute→</a>
+    <br/>
+  </div>
+</div>
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.extortionQuizFunc}>Start “Extortion” Questions →</button>
+</div>
+
+<br/><br/>
+
+<div className="collap">
+  <button class="accordion" onClick = {this.prepareFunc}>FINANCIAL HARM: <br></br><i><p style={{'font-size':'16px'}}>causes or threatens to cause financial harm to any person</p></i></button>
+
+  <div class="panel">
+    <ul>
+      <li><strong>Lay Definition :</strong> Financial harm is involved if the subject puts the victim in a detrimental position in relation to wealth,
+          property, or other monetary benefits through extortion, criminal usury, or illegal employment contracts.
+          This might include a situation where the subject uses an illegal employment contract to lure a victim to
+          work in demeaning conditions.</li>
+      <br></br>
+      <li><strong>Legal Definition : </strong>Financial harm is defined as "a detrimental position in relation to wealth, property or other monetary benefits
+          that occurs as a result of another person's illegal act including, but not limited to, extortion under Mass. Gen.
+          Laws Ch. 265, Sec. 49 (“Criminal Usury”) or illegal employment contracts." Mass. Gen. Laws Ch. 265, § 49.</li>
+      <br></br>
+      <li><strong>Examples: </strong>The subject runs up a debt of $10,000 on credit cards in the victim's name and says she has to work to pay it off.</li>
+    </ul>
+    <hr></hr>
+    <a href="#">Link to Massachusetts Statute→</a>
+    <br/>
+  </div>
+</div>
+
+<div className='collap' style={{'background-color':'#eee', 'border':'none'}}>
+  <button class="button" style = {{'font-size' : '16px', 'justify-text' : 'center',
+  'width':'100%', 'height':'50px' , 'padding': '0', 'margin':'0'}} onClick = {this.fharmQuizFunc}>Start “Financial Harm” Questions →</button>
+</div>
+
+<br/><br/>
+
+
+          <div class="clearfix" style={{'padding' : '30px 20px 10px 20px', 'width' : '100%'}}>
+            <button class="button1" style={{'float' : 'right', 'margin' : '0'}} onClick = {this._onCompleteClick}>Done</button>
+          </div>
+
+
+
+
+
+              if (this.state.qcategory == 1) {
+                if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes'
+                  || this.state.Answer5 == 'Yes'|| this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+              else if (this.state.qcategory == 2) {
+                if (this.state.Answer1 == 'Yes' || this.state.Answer4 == 'Yes' || this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes'
+                  || this.state.Answer8 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+              else if (this.state.qcategory == 3) {
+                if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+              else if (this.state.qcategory == 4) {
+                if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes' || this.state.Answer3 == 'Yes'|| this.state.Answer4 == 'Yes'
+                  || this.state.Answer5 == 'Yes'|| this.state.Answer6 == 'Yes'|| this.state.Answer7 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+              else if (this.state.qcategory == 5) {
+                if (this.state.Answer1 == 'Yes' || this.state.Answer2 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+              else if (this.state.qcategory == 6) {
+                if (this.state.Answer4 == 'Yes') {
+                  return ['Yes']
+                }
+              }
+
+
+              /*
+                  if (this.state.Answer1 != '') {
+                    answersCount[this.state.Answer1] += 1
+                  }
+
+                  if (this.state.Answer2 != '') {
+                    answersCount[this.state.Answer2] += 1
+                  }
+
+                  if (this.state.Answer3 != '') {
+                    answersCount[this.state.Answer3] += 1
+                  }
+
+                  if (this.state.Answer4 != '') {
+                    answersCount[this.state.Answer4] += 1
+                  }
+
+                  if (this.state.Answer5 != '') {
+                    answersCount[this.state.Answer5] += 1
+                  }
+
+                  if (this.state.Answer6 != '') {
+                    answersCount[this.state.Answer6] += 1
+                  }
+
+                  if (this.state.Answer7 != '') {
+                    answersCount[this.state.Answer7] += 1
+                  }
+
+                  if (this.state.Answer8 != '') {
+                    answersCount[this.state.Answer8] += 1
+                  }
+
+                  if (this.state.Answer9 != '') {
+                    answersCount[this.state.Answer9] += 1
+                  }
+
+                  if (this.state.Answer10 != '') {
+                    answersCount[this.state.Answer10] += 1
+                  }
+
+                  if (this.state.Answer11 != '') {
+                    answersCount[this.state.Answer11] += 1
+                  }
+
+                  if (this.state.Answer12 != '') {
+                    answersCount[this.state.Answer12] += 1
+                  }
+
+                  if (this.state.Answer13 != '') {
+                    answersCount[this.state.Answer13] += 1
+                  }
+                */
+
+
+
+                <YellowBox html={(
+                  <div>
+                    <h1>T Nonimmigrant Status (“T visa”):</h1>
+                    <h2>This benefit is only available to victims who meet the federal definition of a victim of a severe form of human trafficking, which is defined as: </h2>
+                    <p>Sex trafficking in which a commercial sex act is induced by force, fraud, or coercion, or in which the person induced to perform such act has not attained 18 years of age</p>
+                    <p >Labor or services, through the use of force, fraud, or coercion for the purpose of subjection to involuntary servitude, peonage, debt bondage, or slavery.</p>
+                  </div>
+                )} />
+                <YellowBox html={(
+                  <div>
+                    <h1>National Human Trafficking Resource Center</h1>
+                    <h2 style={{marginBottom: '0'}}>Email: help@humantraffickinghotline.org </h2>
+                    <h2 style={{marginBottom: '0'}}>Text: BeFree to 233733 </h2>
+                    <h2>Call: 1(888) 373-7888 </h2>
+                    <p>The hotline is available to answer calls 24 hours a day, 24 hours a week in more than 200 languages. Victims can call the hotline at: 1-888-373-7888, text the hotline at: 233733, or live chat on the website. </p>
+                  </div>
+                )} />
+                <YellowBox html={(
+                  <div>
+                    <h1>Interpretation Resources</h1>
+                    <p>Many local law enforcement departments have access to interpreters.  If you need additional resources, please find below resources for interpretation and translation:</p>
+                    <h2 style={{marginBottom: '0'}}> <span style={{textDecoration : 'underline'}}>Ascentria Care Alliance Interpreter Services</span> (Worcester, MA) </h2>
+                    <h2> <span style={{textDecoration : 'underline'}}>Catholic Charities Interpreter Services</span> (Boston, MA) </h2>
+                  </div>
+                )} />
+
+
+
+                <NormalText html={(
+                  <div>
+                    <h2 style={{fontWeight: "normal"}}>It is important to engage in trauma-informed safety planning with the victim to ensure that the victim is safe throughout the investigation. At the earliest stage as possible, it is recommended that you get a victim advocate involved and make appropriate referrals to victim services agencies that can assist with safety planning. </h2>
+                    <h2>In addition, it may be appropriate to ask additional questions to determine the level of risk. This may involve asking any of the following questions: </h2>
+                  </div>
+                )} />
+                <YellowBox html={(
+                  <div>
+                    <h2 style={{color:"#14558f", paddingLeft:"10px"}}>Are you safe?</h2>
+                    <h2 style={{color:"#14558f", paddingLeft:"10px"}}>What are you afraid will happen?</h2>
+                    <h2 style={{color:"#14558f", paddingLeft:"10px"}}>Have you ever been threatened?</h2>
+                    <h2 style={{color:"#14558f", paddingLeft:"10px"}}>Do you owe a debt to anyone?</h2>
+                    <h2 style={{color:"#14558f", paddingLeft:"10px"}}>Are you afraid of deportation?</h2>
+                  </div>
+                )} />
