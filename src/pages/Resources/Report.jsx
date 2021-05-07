@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 import NormalText from '../../structures/normalText';
 import BlueBox from '../../structures/blueBox';
@@ -97,11 +98,11 @@ export default class Report extends Component {
               marginRight: 'auto',
             }}
           >
-            <a href="/resources?id=0">
+            <Link to="/victim-services">
               <button class="button3" style={{ float: 'unset' }}>
                 Victim Services
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>

@@ -1,6 +1,19 @@
 import React, { Component } from 'react';
 
+import YellowBox from '../../structures/yellowBox';
+import BlueBox from '../../structures/blueBox';
+import NormalText from '../../structures/normalText';
+import QuestionBox from '../../structures/questionBox';
+
 export default class Resources extends Component {
+  state = {
+    resourcesPage: 0,
+  };
+
+  handleResourcesClick(id) {
+    this.setState({ resourcesPage: id });
+  }
+
   render() {
     let blueBoxContainer = 'prepareBlueBoxContainer blueBoxLeft';
     let blueBoxContainerOrganizations = 'prepareBlueBoxContainer';
@@ -8,31 +21,28 @@ export default class Resources extends Component {
     let blueBoxOrganizations = 'immigrationUl prepareBlueBox';
     let qClass = 'immigrationQ';
 
-    function menuClass(id) {
-      return 'lis new-lis resources-lis ' + (id == this.state.resourcesPage ? 'resources-lis-active' : '');
-    }
-    menuClass = menuClass.bind(this);
+    const { resourcesPage } = this.state;
 
     return (
       <div>
         <div className="App hidden-md hidden-lg">
-          <p class="pageTitle">Resources</p>
-          <p class="Head" style={{ paddingBottom: '15px' }}>
+          <p className="pageTitle">Resources</p>
+          <p className="Head" style={{ paddingBottom: '15px' }}>
             Victim services
           </p>
         </div>
         <div style={{ borderBottom: '2px solid #EAEAEA' }} className="App hidden-xs hidden-sm">
-          <div class="homeContainer" style={{ paddingBottom: '30px' }}>
-            <p class="pageTitle">Resources</p>
-            <p class="Head" style={{ paddingBottom: '15px' }}>
+          <div className="homeContainer" style={{ paddingBottom: '30px' }}>
+            <p className="pageTitle">Resources</p>
+            <p className="Head" style={{ paddingBottom: '15px' }}>
               Victim services
             </p>
           </div>
         </div>
-        <div class="resourcesDiv">
-          <div class="menu resourcesMenu">
+        <div className="resourcesDiv">
+          <div className="menu resourcesMenu">
             <div
-              class={menuClass(0)}
+              className={`lis new-lis resources-lis ${resourcesPage === 0 && 'resources-lis-active'}`}
               onClick={() => {
                 this.handleResourcesClick(0);
               }}
@@ -40,7 +50,7 @@ export default class Resources extends Component {
               Emergency
             </div>
             <div
-              class={menuClass(1)}
+              className={`lis new-lis resources-lis ${resourcesPage === 1 && 'resources-lis-active'}`}
               onClick={() => {
                 this.handleResourcesClick(1);
               }}
@@ -48,7 +58,7 @@ export default class Resources extends Component {
               Safety
             </div>
             <div
-              class={menuClass(2)}
+              className={`lis new-lis resources-lis ${resourcesPage === 2 && 'resources-lis-active'}`}
               onClick={() => {
                 this.handleResourcesClick(2);
               }}
@@ -56,7 +66,7 @@ export default class Resources extends Component {
               Immigration
             </div>
             <div
-              class={menuClass(3)}
+              className={`lis new-lis resources-lis ${resourcesPage === 3 && 'resources-lis-active'}`}
               onClick={() => {
                 this.handleResourcesClick(3);
               }}
@@ -65,7 +75,7 @@ export default class Resources extends Component {
             </div>
           </div>
         </div>
-        <div class="resourcesContent">
+        <div className="resourcesContent">
           {(() => {
             if (this.state.resourcesPage == 0)
               return (
@@ -137,7 +147,7 @@ export default class Resources extends Component {
                       </div>
                     }
                   />
-                  <div class="hidden-md hidden-lg">
+                  <div className="hidden-md hidden-lg">
                     <BlueBox
                       html={
                         <div>
@@ -193,8 +203,8 @@ export default class Resources extends Component {
                       }
                     />
                   </div>
-                  <div class="hidden-xs hidden-sm">
-                    <div class="massTitle">
+                  <div className="hidden-xs hidden-sm">
+                    <div className="massTitle">
                       <p>Emergency Shelter</p>
                     </div>
                     <NormalText
@@ -236,7 +246,7 @@ export default class Resources extends Component {
                         </div>
                       }
                     />
-                    <div class="massTitle">
+                    <div className="massTitle">
                       <p>Food</p>
                     </div>
                     <NormalText
@@ -280,7 +290,7 @@ export default class Resources extends Component {
                           recommended that investigators get a victim advocate involved and make appropriate referrals
                           to victim services agencies that can assist with safety planning.
                         </h2>
-                        <br class="hidden-xs hidden-sm" />
+                        <br className="hidden-xs hidden-sm" />
                         <h2 style={{ fontWeight: 'normal' }}>
                           In addition, it may be appropriate to ask additional questions to determine the level of risk.
                           This may involve asking any of the following questions:
@@ -290,7 +300,7 @@ export default class Resources extends Component {
                   />
                   <YellowBox
                     html={
-                      <div class="desktopSafety">
+                      <div className="desktopSafety">
                         <h2 style={{ color: '#11416D' }}>Are you safe?</h2>
                         <h2 style={{ color: '#11416D' }}>What are you afraid will happen?</h2>
                         <h2 style={{ color: '#11416D' }}>Have you ever been threatened?</h2>
@@ -637,13 +647,13 @@ export default class Resources extends Component {
                   />
 
                   <br />
-                  <div class="massTitle hidden-xs hidden-sm">
+                  <div className="massTitle hidden-xs hidden-sm">
                     <p>Immigration Protection for Immigrant Victims of Human Trafficking</p>
                   </div>
                   <NormalText
                     html={
                       <div>
-                        <h1 class="hidden-md hidden-lg">
+                        <h1 className="hidden-md hidden-lg">
                           Immigration Protection for Immigrant Victims of Human Trafficking
                         </h1>
                         <h2 style={{ fontWeight: 'normal' }}>
@@ -1064,13 +1074,13 @@ export default class Resources extends Component {
                       </div>
                     }
                   />
-                  <div class="massTitle hidden-xs hidden-sm">
+                  <div className="massTitle hidden-xs hidden-sm">
                     <p>Victim Compensation</p>
                   </div>
                   <NormalText
                     html={
                       <div>
-                        <h2 class="hidden-md hidden-lg">Victim Compensation:</h2>
+                        <h2 className="hidden-md hidden-lg">Victim Compensation:</h2>
                         <h2 style={{ fontWeight: 'normal' }}>
                           Victims of labor trafficking may also be eligible for victim compensation. To apply for
                           compensation, the victim should complete the application{' '}

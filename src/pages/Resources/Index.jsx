@@ -1,4 +1,5 @@
 import React, { Component } from 'react';
+import { Link } from 'react-router-dom';
 
 export default class Resources extends Component {
   render() {
@@ -19,7 +20,7 @@ export default class Resources extends Component {
 
         <div class="App">
           <div class="buttonContainer hidden-sm hidden-xs">
-            <a href="/report">
+            <Link to="/report">
               <button class="button4">
                 <div class="b4_container">
                   <h1>Refer</h1>
@@ -28,8 +29,8 @@ export default class Resources extends Component {
                   <p>Click here to make a referral to law enforcement.</p>
                 </div>
               </button>
-            </a>
-            <a href="/resources?id=0">
+            </Link>
+            <Link to="/victim-services">
               <button class="button4">
                 <div class="b4_container">
                   <h1>Victim Services</h1>
@@ -38,21 +39,21 @@ export default class Resources extends Component {
                   <p>Click here to make a referral to victim services.</p>
                 </div>
               </button>
-            </a>
+            </Link>
           </div>
           <div class="buttonContainer hidden-md hidden-lg">
-            <a href="/report">
+            <Link to="/report">
               <button class="button4">
                 <h1>Refer</h1>
                 <p>Learn how to refer to law enforcement</p>
               </button>
-            </a>
-            <a href="/resources?id=0">
+            </Link>
+            <Link to="/resources?id=0">
               <button class="button4">
                 <h1>Victim Services</h1>
                 <p>Find Victim Services</p>
               </button>
-            </a>
+            </Link>
           </div>
         </div>
       </div>
