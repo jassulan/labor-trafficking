@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Link } from 'react-router-dom';
 
 class NavBar extends Component {
   render() {
@@ -10,29 +10,29 @@ class NavBar extends Component {
     return (
       <div class="row menu">
         <div class="col-md-2 col-lg-2 lis new-lis">
-          <a href="/prepare" class={pathname == '/prepare' ? 'active' : ''}>
+          <Link to="/prepare" class={pathname == '/prepare' ? 'active' : ''}>
             Prepare
-          </a>
+          </Link>
         </div>
         <div class="col-md-2 col-lg-2 lis new-lis">
-          <a href="/assess" class={pathname == '/assess' ? 'active' : ''}>
+          <Link to="/assess" class={pathname == '/assess' ? 'active' : ''}>
             Assess
-          </a>
+          </Link>
         </div>
         <div class="col-md-2 col-lg-2 lis new-lis">
-          <a href="/resourcesHome" class={pathname == '/resourcesHome' ? 'active' : ''}>
+          <Link to="/resources" class={pathname == '/resources' ? 'active' : ''}>
             Resources
-          </a>
+          </Link>
         </div>
         <div class="col-md-2 col-lg-2 lis new-lis">
-          <a href="/statute" class={pathname == '/statute' ? 'active' : ''}>
+          <Link to="/statute" class={pathname == '/statute' ? 'active' : ''}>
             Massachusetts Law
-          </a>
+          </Link>
         </div>
         <div class="col-md-2 col-lg-2 lis new-lis">
-          <a href="/about" class={pathname == '/about' ? 'active' : ''}>
+          <Link to="/about" class={pathname == '/about' ? 'active' : ''}>
             About Us
-          </a>
+          </Link>
         </div>
       </div>
     );
