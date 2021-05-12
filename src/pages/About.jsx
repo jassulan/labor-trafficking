@@ -2,11 +2,37 @@ import React, { Component } from 'react';
 
 import NormalText from '../structures/normalText';
 import BlueBox from '../structures/blueBox';
+import ResultImg from '../ResultWordmark.svg';
 
 export default class About extends Component {
   render() {
     return (
       <div>
+        <div style={{ borderBottom: '1px solid #EAEAEA' }} className="App hidden-md hidden-lg">
+          <div class="pageTitle hidden-lg hidden-md" style={{ textAlign: 'center', paddingBottom: '10px' }}>
+            <img src={ResultImg} style={{ height: '24px', marginBottom: '5px' }} alt="RESULT" />
+          </div>
+          <div class="massTitle" style={{ paddingTop: '0px' }}>
+            <p style={{ borderBottom: 'none' }}>Recognize and Evaluate Signs to Uncover Labor Trafficking</p>
+          </div>
+        </div>
+
+        <div style={{ borderBottom: '1px solid #EAEAEA' }} className="App hidden-xs hidden-sm">
+          <div class="homeContainer" style={{ paddingBottom: '10px' }}>
+            <img class="HomeHead" src={ResultImg} height="30px" alt="RESULT" />
+            <p
+              class="HomeHead1"
+              style={{
+                fontWeight: 'bold',
+                color: '#808080',
+                marginBottom: '20px',
+              }}
+            >
+              Recognize and Evaluate Signs to Uncover Labor Trafficking{' '}
+            </p>
+          </div>
+        </div>
+
         <div style={{ backgroundColor: '#fff', paddingTop: '20px' }}>
           <div class="massTitle">
             <p>Our goal</p>

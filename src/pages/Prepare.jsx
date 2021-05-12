@@ -1,5 +1,8 @@
 import React, { Component } from 'react';
 
+import BlueBox from '../structures/blueBox';
+import QuestionBox from '../structures/questionBox';
+
 export default class Prepare extends Component {
   render() {
     let blueBoxContainer = 'prepareBlueBoxContainer blueBoxLeft';
